@@ -1,22 +1,31 @@
 import SwiftUI
 
 struct ContentView: View {
-    @StateObject var visitManager = StateVisitManager()
+    @StateObject var stateVisitManager = StateVisitManager()
+    @State private var selectedTab = 1
     
     var body: some View {
-        IndiaMapView(visitManager: visitManager)
-            .ignoresSafeArea()
-            .overlay(
-                VStack {
-                    Text("Been There")
-                        .font(.system(size: 20, weight: .bold, design: .rounded))
-                        .padding(.horizontal, 20)
-                        .padding(.vertical, 10)
-                        .background(Capsule().fill(Color.white.opacity(0.8)))
-                        .padding(.top, 10)
-                    Spacer()
+        TabView(selection: $selectedTab) {
+            IndiaMapView(visitManager: stateVisitManager)
+                .ignoresSafeArea(edges: .top)
+                .tabItem {
+                    Label("Map", systemImage: "map")
                 }
-            )
+                .tag(0)
+            
+            StatsView(viewModel: StatsViewModel(stateVisitManager: stateVisitManager))
+                .tabItem {
+                    Label("Stats", systemImage: "chart.bar.fill")
+                }
+                .tag(1)
+            
+            Text("Settings")
+                .tabItem {
+                    Label("Settings", systemImage: "gearshape")
+                }
+                .tag(3)
+        }
+        .accentColor(Color(hex: "2D6A4F"))
     }
 }
 
