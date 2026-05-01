@@ -1,11 +1,16 @@
 import Foundation
 
 class StateVisitManager: ObservableObject {
-    @Published var visitedStates: Set<String> = []
+    @Published var visitedStates: Set<String> = [] {
+        didSet {
+            save()
+        }
+    }
+    
+    private let storageKey = "visited_states_key"
     
     init() {
-        // Pre-fill some states as visited for testing
-        visitedStates = ["Maharashtra", "Karnataka", "Goa", "Rajasthan", "Delhi"]
+        load()
     }
     
     func isVisited(_ stateName: String) -> Bool {
@@ -17,6 +22,20 @@ class StateVisitManager: ObservableObject {
             visitedStates.remove(stateName)
         } else {
             visitedStates.insert(stateName)
+        }
+    }
+    
+    private func save() {
+        let array = Array(visitedStates)
+        UserDefaults.standard.set(array, forKey: storageKey)
+    }
+    
+    private func load() {
+        if let array = UserDefaults.standard.stringArray(forKey: storageKey) {
+            visitedStates = Set(array)
+        } else {
+            // Default states for first-time users
+            visitedStates = ["Maharashtra", "Karnataka", "Goa", "Rajasthan", "Delhi"]
         }
     }
 }
