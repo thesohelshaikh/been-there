@@ -1,47 +1,61 @@
 package com.thesohelshaikh.com.beenthere
 
-import androidx.compose.animation.AnimatedVisibility
-import androidx.compose.foundation.Image
-import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.safeContentPadding
-import androidx.compose.material3.Button
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Text
+import androidx.compose.foundation.layout.padding
+import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
-import org.jetbrains.compose.resources.painterResource
+import com.thesohelshaikh.com.beenthere.data.CityVisitManager
+import com.thesohelshaikh.com.beenthere.domain.IndiaStateRepository
+import com.thesohelshaikh.com.beenthere.ui.CitySelectionDialog
+import com.thesohelshaikh.com.beenthere.ui.IndiaMap
 
-import beenthere.composeapp.generated.resources.Res
-import beenthere.composeapp.generated.resources.compose_multiplatform
-
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
-@Preview
 fun App() {
+    val cityVisitManager = remember { CityVisitManager() }
+    val repository = remember { IndiaStateRepository(cityVisitManager) }
+    
+    val statesWithStatus by repository.getStatesWithVisitStatus().collectAsState(initial = null)
+    var showCityDialog by remember { mutableStateOf(false) }
+
     MaterialTheme {
-        var showContent by remember { mutableStateOf(false) }
-        Column(
-            modifier = Modifier
-                .background(MaterialTheme.colorScheme.primaryContainer)
-                .safeContentPadding()
-                .fillMaxSize(),
-            horizontalAlignment = Alignment.CenterHorizontally,
-        ) {
-            Button(onClick = { showContent = !showContent }) {
-                Text("Click me!")
+        Scaffold(
+            topBar = {
+                CenterAlignedTopAppBar(
+                    title = { Text("Been There - India") }
+                )
+            },
+            floatingActionButton = {
+                FloatingActionButton(onClick = { showCityDialog = true }) {
+                    Text("+")
+                }
             }
-            AnimatedVisibility(showContent) {
-                val greeting = remember { Greeting().greet() }
-                Column(
-                    modifier = Modifier.fillMaxWidth(),
-                    horizontalAlignment = Alignment.CenterHorizontally,
-                ) {
-                    Image(painterResource(Res.drawable.compose_multiplatform), null)
-                    Text("Compose: $greeting")
+        ) { padding ->
+            Box(
+                modifier = Modifier
+                    .fillMaxSize()
+                    .padding(padding)
+            ) {
+                val currentStates = statesWithStatus
+                if (currentStates == null) {
+                    CircularProgressIndicator(modifier = Modifier.align(Alignment.Center))
+                } else if (currentStates.isEmpty()) {
+                    Text("No states found. Check JSON data.", modifier = Modifier.align(Alignment.Center))
+                } else {
+                    IndiaMap(states = currentStates)
+                }
+
+                if (showCityDialog && currentStates != null) {
+                    CitySelectionDialog(
+                        states = currentStates.map { it.state },
+                        onCitySelected = { cityId ->
+                            cityVisitManager.markCityAsVisited(cityId)
+                        },
+                        onDismiss = { showCityDialog = false }
+                    )
                 }
             }
         }
