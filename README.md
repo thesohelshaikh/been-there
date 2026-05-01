@@ -1,35 +1,55 @@
-This is a Kotlin Multiplatform project targeting Android, iOS.
+# BeenThere
 
-* [/composeApp](./composeApp/src) is for code that will be shared across your Compose Multiplatform applications.
-  It contains several subfolders:
-  - [commonMain](./composeApp/src/commonMain/kotlin) is for code that’s common for all targets.
-  - Other folders are for Kotlin code that will be compiled for only the platform indicated in the folder name.
-    For example, if you want to use Apple’s CoreCrypto for the iOS part of your Kotlin app,
-    the [iosMain](./composeApp/src/iosMain/kotlin) folder would be the right place for such calls.
-    Similarly, if you want to edit the Desktop (JVM) specific part, the [jvmMain](./composeApp/src/jvmMain/kotlin)
-    folder is the appropriate location.
+BeenThere is a native iOS application designed to help you track your travels across India. It provides an interactive map where you can mark visited states and union territories, and view detailed statistics about your regional coverage.
 
-* [/iosApp](./iosApp/iosApp) contains iOS applications. Even if you’re sharing your UI with Compose Multiplatform,
-  you need this entry point for your iOS app. This is also where you should add SwiftUI code for your project.
+## Features
 
-### Build and Run Android Application
+- **Interactive India Map:** Tap on states and union territories to mark them as visited.
+- **Dynamic Stats:** Track your progress with percentage-based coverage for different regions of India (North, South, East, West, Central, and Northeast).
+- **Regional Breakdown:** See exactly which states you've visited in each region.
+- **Persistence:** Your travel history is saved locally on your device.
 
-To build and run the development version of the Android app, use the run configuration from the run widget
-in your IDE’s toolbar or build it directly from the terminal:
-- on macOS/Linux
-  ```shell
-  ./gradlew :composeApp:assembleDebug
-  ```
-- on Windows
-  ```shell
-  .\gradlew.bat :composeApp:assembleDebug
-  ```
+## Tech Stack
 
-### Build and Run iOS Application
+- **Swift & SwiftUI:** Modern declarative UI.
+- **MapKit:** High-performance mapping and GeoJSON rendering.
+- **XcodeGen:** Simplified project management and configuration.
+- **MVVM Architecture:** Clean separation of concerns for maintainability and testability.
 
-To build and run the development version of the iOS app, use the run configuration from the run widget
-in your IDE’s toolbar or open the [/iosApp](./iosApp) directory in Xcode and run it from there.
+## Getting Started
 
----
+### Prerequisites
 
-Learn more about [Kotlin Multiplatform](https://www.jetbrains.com/help/kotlin-multiplatform-dev/get-started.html)…
+- macOS with Xcode 15 or later.
+- [XcodeGen](https://github.com/yonaskolb/XcodeGen) (can be installed via Homebrew: `brew install xcodegen`).
+
+### Setup
+
+1. Clone the repository.
+2. Generate the Xcode project:
+   ```bash
+   xcodegen generate
+   ```
+3. Open `BeenThere.xcodeproj` in Xcode.
+4. Select a simulator or physical device and run the app (Cmd+R).
+
+## Development Workflow
+
+This project uses **OpenSpec** for spec-driven development. 
+
+- New features or major changes are first proposed in the `openspec/` directory.
+- Use the Gemini CLI commands (if available) to manage the workflow:
+    - `/opsx:propose` - Start a new change.
+    - `/opsx:apply` - Implement tasks.
+    - `/opsx:archive` - Finalize changes.
+
+## Testing
+
+Run unit tests via Xcode (Cmd+U) or using `xcodebuild`:
+```bash
+xcodebuild test -scheme BeenThere -destination 'platform=iOS Simulator,name=iPhone 15'
+```
+
+## License
+
+This project is licensed under the MIT License.
