@@ -12,9 +12,12 @@ struct IndiaMapView: UIViewRepresentable {
         let mapView = MKMapView()
         mapView.delegate = context.coordinator
         
-        // Center on India
-        let indiaCenter = CLLocationCoordinate2D(latitude: 20.5937, longitude: 78.9629)
-        let region = MKCoordinateRegion(center: indiaCenter, span: MKCoordinateSpan(latitudeDelta: 25, longitudeDelta: 25))
+        // Ensure the map itself doesn't have internal margins
+        mapView.insetsLayoutMarginsFromSafeArea = false
+        
+        // Center on India - Adjusted span to be tighter
+        let indiaCenter = CLLocationCoordinate2D(latitude: 22.5937, longitude: 78.9629)
+        let region = MKCoordinateRegion(center: indiaCenter, span: MKCoordinateSpan(latitudeDelta: 30, longitudeDelta: 30))
         mapView.setRegion(region, animated: false)
         
         // Add Tap Gesture
@@ -94,7 +97,6 @@ struct IndiaMapView: UIViewRepresentable {
             let coord = mapView.convert(touchPoint, toCoordinateFrom: mapView)
             let mapPoint = MKMapPoint(coord)
             
-            // Find the top-most polygon that contains the tapped point
             for overlay in mapView.overlays.reversed() {
                 if let polygon = overlay as? StatePolygon {
                     let renderer = MKPolygonRenderer(polygon: polygon)
@@ -103,7 +105,7 @@ struct IndiaMapView: UIViewRepresentable {
                     if renderer.path.contains(rendererPoint) {
                         if let stateName = polygon.stateName {
                             parent.visitManager.toggleVisit(for: stateName)
-                            return // Toggle one state at a time
+                            return
                         }
                     }
                 }
@@ -118,7 +120,7 @@ struct IndiaMapView: UIViewRepresentable {
                 if parent.visitManager.isVisited(stateName) {
                     renderer.fillColor = UIColor.systemGreen.withAlphaComponent(0.6)
                 } else {
-                    renderer.fillColor = UIColor.systemGray.withAlphaComponent(0.2)
+                    renderer.fillColor = UIColor.systemGray.withAlphaComponent(0.3)
                 }
                 
                 renderer.strokeColor = UIColor.white
