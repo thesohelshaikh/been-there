@@ -21,8 +21,8 @@
 		24567802EB06D9971337706F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		5C54D751EC55B8A7D260E38A /* StateVisitManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StateVisitManager.swift; sourceTree = "<group>"; };
 		6E0952C1722C8C4F95CB3D74 /* BeenThereApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BeenThereApp.swift; sourceTree = "<group>"; };
-		8511B427ED541CF688BCBDC0 /* india_states.geojson */ = {isa = PBXFileReference; path = india_states.geojson; sourceTree = "<group>"; };
-		927FDF49CA9D254ED3961125 /* BeenThere.app */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.application; path = BeenThere.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		8511B427ED541CF688BCBDC0 /* india_states.geojson */ = {isa = PBXFileReference; lastKnownFileType = text; path = india_states.geojson; sourceTree = "<group>"; };
+		927FDF49CA9D254ED3961125 /* BeenThere.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BeenThere.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9DBF00A6AE3EC97BFA805238 /* india_states.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = india_states.json; sourceTree = "<group>"; };
 		DF0E23BD024325DF5E41AEBF /* IndiaMapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IndiaMapView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -111,8 +111,6 @@
 			attributes = {
 				BuildIndependentTargetsInParallel = YES;
 				LastUpgradeCheck = 1430;
-				TargetAttributes = {
-				};
 			};
 			buildConfigurationList = AA2DD72CC4289FC2C6456F49 /* Build configuration list for PBXProject "BeenThere" */;
 			developmentRegion = en;
@@ -229,6 +227,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				DEVELOPMENT_TEAM = FY2HBP6LC5;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -251,6 +250,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				DEVELOPMENT_TEAM = FY2HBP6LC5;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
