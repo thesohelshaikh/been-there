@@ -11,40 +11,17 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		032D6465FE3AF918D6B71F23 /* been there.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "been there.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		032D6465FE3AF918D6B71F23 /* .app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = .app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
-
-/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
-		336D68AE238C9618260E547D /* Exceptions for "iosApp" folder in "iosApp" target */ = {
-			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
-			membershipExceptions = (
-				Info.plist,
-			);
-			target = 438E9F7291249816A4217CEE /* iosApp */;
-		};
-		7DADD3B42FA4CDAA008EB8C1 /* Exceptions for "Configuration" folder in "iosApp" target */ = {
-			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
-			membershipExceptions = (
-				Config.xcconfig,
-			);
-			target = 438E9F7291249816A4217CEE /* iosApp */;
-		};
-/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		A3D2FAC8084EEC55FF521918 /* Configuration */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
-			exceptions = (
-				7DADD3B42FA4CDAA008EB8C1 /* Exceptions for "Configuration" folder in "iosApp" target */,
-			);
 			path = Configuration;
 			sourceTree = "<group>";
 		};
 		FE60C7033056950A59022210 /* iosApp */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
-			exceptions = (
-				336D68AE238C9618260E547D /* Exceptions for "iosApp" folder in "iosApp" target */,
-			);
 			path = iosApp;
 			sourceTree = "<group>";
 		};
@@ -65,7 +42,7 @@
 		3A0100370F44CA0D0DECF4C1 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				032D6465FE3AF918D6B71F23 /* been there.app */,
+				032D6465FE3AF918D6B71F23 /* .app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -103,7 +80,7 @@
 				BEEF0002BEEF0002BEEF0002 /* MapLibre */,
 			);
 			productName = iosApp;
-			productReference = 032D6465FE3AF918D6B71F23 /* been there.app */;
+			productReference = 032D6465FE3AF918D6B71F23 /* .app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -130,11 +107,11 @@
 			);
 			mainGroup = 6750B69C2BC47862210D601C;
 			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				BEEF0001BEEF0001BEEF0001 /* XCRemoteSwiftPackageReference "maplibre-gl-native-distribution" */,
+			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 3A0100370F44CA0D0DECF4C1 /* Products */;
-			packageReferences = (
-				BEEF0001BEEF0001BEEF0001 /* MapLibre */,
-			);
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
@@ -152,17 +129,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
-
-/* Begin XCRemoteSwiftPackageReference section */
-		BEEF0001BEEF0001BEEF0001 /* MapLibre */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/maplibre/maplibre-gl-native-distribution.git";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 6.0.0;
-			};
-		};
-/* End XCRemoteSwiftPackageReference section */
 
 /* Begin PBXShellScriptBuildPhase section */
 		61F19878C2E7991A93260098 /* Compile Kotlin Framework */ = {
@@ -196,14 +162,6 @@
 		};
 /* End PBXSourcesBuildPhase section */
 
-/* Begin XCSwiftPackageProductDependency section */
-		BEEF0002BEEF0002BEEF0002 /* MapLibre */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = BEEF0001BEEF0001BEEF0001 /* MapLibre */;
-			productName = MapLibre;
-		};
-/* End XCSwiftPackageProductDependency section */
-
 /* Begin XCBuildConfiguration section */
 		024E7E1FD6F5602EEA05C6AF /* Release */ = {
 			isa = XCBuildConfiguration;
@@ -223,11 +181,11 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				OTHER_LDFLAGS = "-ObjC";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				OTHER_LDFLAGS = "-ObjC";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -310,11 +268,11 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				OTHER_LDFLAGS = "-ObjC";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				OTHER_LDFLAGS = "-ObjC";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -408,6 +366,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		BEEF0001BEEF0001BEEF0001 /* XCRemoteSwiftPackageReference "maplibre-gl-native-distribution" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/maplibre/maplibre-gl-native-distribution.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 6.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		BEEF0002BEEF0002BEEF0002 /* MapLibre */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = BEEF0001BEEF0001BEEF0001 /* XCRemoteSwiftPackageReference "maplibre-gl-native-distribution" */;
+			productName = MapLibre;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 7F7B73B017221E47D0977376 /* Project object */;
 }
