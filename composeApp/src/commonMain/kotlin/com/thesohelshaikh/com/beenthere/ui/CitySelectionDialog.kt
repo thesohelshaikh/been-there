@@ -18,24 +18,39 @@ fun CitySelectionDialog(
 ) {
     AlertDialog(
         onDismissRequest = onDismiss,
-        title = { Text("Mark City as Visited") },
-        text = {
-            LazyColumn {
-                items(states) { state ->
-                    ListItem(
-                        headlineContent = { Text(state.capital) },
-                        supportingContent = { Text(state.name) },
-                        modifier = Modifier.clickable {
-                            onCitySelected(state.capital)
-                            onDismiss()
-                        }
-                    )
-                }
-            }
-        },
         confirmButton = {
             TextButton(onClick = onDismiss) {
-                Text("Cancel")
+                Text("Close")
+            }
+        },
+        title = {
+            Text("Select a City")
+        },
+        text = {
+            Box(modifier = Modifier.heightIn(max = 400.dp)) {
+                LazyColumn {
+                    items(states) { state ->
+                        Column(
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .clickable {
+                                    onCitySelected(state.capital)
+                                    onDismiss()
+                                }
+                                .padding(vertical = 12.dp)
+                        ) {
+                            Text(
+                                text = state.capital,
+                                style = MaterialTheme.typography.bodyLarge
+                            )
+                            Text(
+                                text = state.name,
+                                style = MaterialTheme.typography.bodySmall,
+                                color = MaterialTheme.colorScheme.secondary
+                            )
+                        }
+                    }
+                }
             }
         }
     )

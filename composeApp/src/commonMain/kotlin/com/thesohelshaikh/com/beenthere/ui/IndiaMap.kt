@@ -1,74 +1,95 @@
 package com.thesohelshaikh.com.beenthere.ui
 
-import androidx.compose.foundation.Canvas
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.runtime.Composable
+import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.geometry.Rect
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.Path
-import androidx.compose.ui.graphics.drawscope.Stroke
-import androidx.compose.ui.graphics.drawscope.scale
-import androidx.compose.ui.graphics.drawscope.withTransform
-import androidx.compose.ui.graphics.vector.PathParser
-import com.thesohelshaikh.com.beenthere.domain.StateWithVisitStatus
-import kotlin.math.max
-import kotlin.math.min
+import androidx.compose.ui.unit.dp
+import beenthere.composeapp.generated.resources.Res
+import io.github.dellisd.spatialk.geojson.Position
+import org.jetbrains.compose.resources.ExperimentalResourceApi
+import org.maplibre.compose.camera.rememberCameraState
+import org.maplibre.compose.camera.CameraPosition
+import org.maplibre.compose.style.BaseStyle
+import org.maplibre.compose.expressions.dsl.*
+import org.maplibre.compose.layers.FillLayer
+import org.maplibre.compose.layers.LineLayer
+import org.maplibre.compose.map.MaplibreMap
+import org.maplibre.compose.sources.GeoJsonData
+import org.maplibre.compose.sources.rememberGeoJsonSource
 
+@OptIn(ExperimentalResourceApi::class)
 @Composable
 fun IndiaMap(
-    states: List<StateWithVisitStatus>,
+    visitedStateNames: Set<String>,
     modifier: Modifier = Modifier
 ) {
-    if (states.isEmpty()) return
+    var geoJsonString by remember { mutableStateOf<String?>(null) }
+    
+    // Map of repository state names to GeoJSON ST_NM property values
+    val geoJsonNameMap = remember {
+        mapOf(
+            "Arunachal Pradesh" to "Arunanchal Pradesh",
+            "Telangana" to "Telengana",
+            "Andaman and Nicobar Islands" to "Andaman & Nicobar Island",
+            "Dadra and Nagar Haveli" to "Dadara & Nagar Haveli",
+            "Daman and Diu" to "Daman & Diu",
+            "Jammu and Kashmir" to "Jammu & Kashmir",
+            "NCT of Delhi" to "Delhi"
+        )
+    }
 
-    Canvas(modifier = modifier.fillMaxSize().background(Color.White)) {
-        val parsedPaths = states.map { it to PathParser().parsePathString(it.state.pathData).toPath() }
-        
-        // Calculate total bounding box manually to avoid union conflict
-        var minX = Float.POSITIVE_INFINITY
-        var minY = Float.POSITIVE_INFINITY
-        var maxX = Float.NEGATIVE_INFINITY
-        var maxY = Float.NEGATIVE_INFINITY
+    val mappedVisitedNames = remember(visitedStateNames) {
+        visitedStateNames.map { geoJsonNameMap[it] ?: it }.toSet()
+    }
 
-        parsedPaths.forEach { (_, path) ->
-            val b = path.getBounds()
-            minX = min(minX, b.left)
-            minY = min(minY, b.top)
-            maxX = max(maxX, b.right)
-            maxY = max(maxY, b.bottom)
+    LaunchedEffect(Unit) {
+        try {
+            val bytes = Res.readBytes("files/india_states.geojson")
+            geoJsonString = bytes.decodeToString()
+        } catch (e: Exception) {
+            println("IndiaMap: Error loading GeoJSON: ${e.message}")
         }
+    }
 
-        if (minX != Float.POSITIVE_INFINITY) {
-            val mapWidth = maxX - minX
-            val mapHeight = maxY - minY
-            
-            val scaleX = size.width / mapWidth
-            val scaleY = size.height / mapHeight
-            val scale = minOf(scaleX, scaleY) * 0.9f // 90% of screen to have margins
+    if (geoJsonString == null) return
 
-            withTransform({
-                // Center the map
-                translate(
-                    left = (size.width - mapWidth * scale) / 2f - minX * scale,
-                    top = (size.height - mapHeight * scale) / 2f - minY * scale
+    val cameraState = rememberCameraState(
+        firstPosition = CameraPosition(
+            target = Position(78.9629, 20.5937),
+            zoom = 3.5
+        )
+    )
+
+    MaplibreMap(
+        modifier = modifier.fillMaxSize(),
+        baseStyle = BaseStyle.Uri("https://demotiles.maplibre.org/style.json"),
+        cameraState = cameraState
+    ) {
+        val indiaSource = rememberGeoJsonSource(
+            data = GeoJsonData.JsonString(geoJsonString!!)
+        )
+
+        FillLayer(
+            id = "states-fill",
+            source = indiaSource,
+            color = if (mappedVisitedNames.isEmpty()) {
+                const(Color(0xFFCCCCCC).copy(alpha = 0.5f))
+            } else {
+                switch(
+                    input = feature.get("ST_NM").asString(),
+                    cases = mappedVisitedNames.map { case(it, const(Color(0xFF4CAF50))) }.toTypedArray(),
+                    fallback = const(Color(0xFFCCCCCC).copy(alpha = 0.5f))
                 )
-                scale(scale, scale, pivot = androidx.compose.ui.geometry.Offset.Zero)
-            }) {
-                parsedPaths.forEach { (stateWithStatus, path) ->
-                    drawPath(
-                        path = path,
-                        color = if (stateWithStatus.isVisited) Color(0xFF4CAF50) else Color(0xFFCCCCCC)
-                    )
-                    
-                    drawPath(
-                        path = path,
-                        color = Color.DarkGray,
-                        style = Stroke(width = 1f / scale)
-                    )
-                }
-            }
-        }
+            },
+            opacity = const(0.7f)
+        )
+
+        LineLayer(
+            id = "states-outline",
+            source = indiaSource,
+            color = const(Color.DarkGray),
+            width = const(1.dp)
+        )
     }
 }

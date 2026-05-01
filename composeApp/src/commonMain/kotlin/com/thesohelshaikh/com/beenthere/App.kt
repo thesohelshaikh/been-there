@@ -7,6 +7,8 @@ import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.font.FontFamily
 import com.thesohelshaikh.com.beenthere.data.CityVisitManager
 import com.thesohelshaikh.com.beenthere.domain.IndiaStateRepository
 import com.thesohelshaikh.com.beenthere.ui.CitySelectionDialog
@@ -19,9 +21,22 @@ fun App() {
     val repository = remember { IndiaStateRepository(cityVisitManager) }
     
     val statesWithStatus by repository.getStatesWithVisitStatus().collectAsState(initial = null)
+    val visitedCities by cityVisitManager.visitedCities.collectAsState()
     var showCityDialog by remember { mutableStateOf(false) }
+    
+    val typography = Typography(
+        bodyLarge = TextStyle(fontFamily = FontFamily.Default),
+        bodyMedium = TextStyle(fontFamily = FontFamily.Default),
+        bodySmall = TextStyle(fontFamily = FontFamily.Default),
+        titleLarge = TextStyle(fontFamily = FontFamily.Default),
+        titleMedium = TextStyle(fontFamily = FontFamily.Default),
+        titleSmall = TextStyle(fontFamily = FontFamily.Default),
+        labelLarge = TextStyle(fontFamily = FontFamily.Default),
+        labelMedium = TextStyle(fontFamily = FontFamily.Default),
+        labelSmall = TextStyle(fontFamily = FontFamily.Default)
+    )
 
-    MaterialTheme {
+    MaterialTheme(typography = typography) {
         Scaffold(
             topBar = {
                 CenterAlignedTopAppBar(
@@ -45,7 +60,10 @@ fun App() {
                 } else if (currentStates.isEmpty()) {
                     Text("No states found. Check JSON data.", modifier = Modifier.align(Alignment.Center))
                 } else {
-                    IndiaMap(states = currentStates)
+                    IndiaMap(
+                        visitedStateNames = currentStates.filter { it.isVisited }.map { it.state.name }.toSet(),
+                        modifier = Modifier.fillMaxSize()
+                    )
                 }
 
                 if (showCityDialog && currentStates != null) {

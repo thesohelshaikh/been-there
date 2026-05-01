@@ -6,6 +6,10 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		BEEF0003BEEF0003BEEF0003 /* MapLibre in Frameworks */ = {isa = PBXBuildFile; productRef = BEEF0002BEEF0002BEEF0002 /* MapLibre */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXFileReference section */
 		032D6465FE3AF918D6B71F23 /* been there.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "been there.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -51,6 +55,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BEEF0003BEEF0003BEEF0003 /* MapLibre in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -95,6 +100,7 @@
 			);
 			name = iosApp;
 			packageProductDependencies = (
+				BEEF0002BEEF0002BEEF0002 /* MapLibre */,
 			);
 			productName = iosApp;
 			productReference = 032D6465FE3AF918D6B71F23 /* been there.app */;
@@ -126,6 +132,9 @@
 			minimizedProjectReferenceProxies = 1;
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 3A0100370F44CA0D0DECF4C1 /* Products */;
+			packageReferences = (
+				BEEF0001BEEF0001BEEF0001 /* MapLibre */,
+			);
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
@@ -143,6 +152,17 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		BEEF0001BEEF0001BEEF0001 /* MapLibre */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/maplibre/maplibre-gl-native-distribution.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 6.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
 
 /* Begin PBXShellScriptBuildPhase section */
 		61F19878C2E7991A93260098 /* Compile Kotlin Framework */ = {
@@ -176,6 +196,14 @@
 		};
 /* End PBXSourcesBuildPhase section */
 
+/* Begin XCSwiftPackageProductDependency section */
+		BEEF0002BEEF0002BEEF0002 /* MapLibre */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = BEEF0001BEEF0001BEEF0001 /* MapLibre */;
+			productName = MapLibre;
+		};
+/* End XCSwiftPackageProductDependency section */
+
 /* Begin XCBuildConfiguration section */
 		024E7E1FD6F5602EEA05C6AF /* Release */ = {
 			isa = XCBuildConfiguration;
@@ -195,6 +223,7 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				OTHER_LDFLAGS = "-ObjC";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -281,6 +310,7 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				OTHER_LDFLAGS = "-ObjC";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
