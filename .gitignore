@@ -1,0 +1,54 @@
+# Gradle files
+.gradle/
+build/
+**/build/
+bin/
+
+# IntelliJ IDEA / Android Studio
+.idea/
+*.iml
+*.iws
+out/
+.idea/libraries/
+.idea/modules.xml
+.idea/workspace.xml
+.idea/tasks.xml
+.idea/assetWizardSettings.xml
+.idea/render.xml
+.idea/deploymentTargetSelector.xml
+
+# Local configuration
+local.properties
+
+# Log files
+*.log
+
+# Android-specific
+captures/
+.externalNativeBuild
+.cxx
+*.ap_
+*.apk
+*.dex
+
+# Kotlin
+.kotlin/
+.konan/
+
+# iOS/macOS
+.DS_Store
+DerivedData/
+*.moved-aside
+*.xccheckout
+*.xcscmblueprint
+xcuserdata/
+# Keep shared workspace settings but ignore user-specific ones
+!*.xcodeproj/project.pbxproj
+!*.xcodeproj/xcshareddata/
+!*.xcodeproj/project.xcworkspace/
+!*.xcworkspace/contents.xcworkspacedata
+**/xcshareddata/WorkspaceSettings.xcsettings
+
+# Secrets
+.env
+.env.*
