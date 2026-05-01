@@ -7,9 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		146B5D430118642DCBAD5245 /* MapLibre in Frameworks */ = {isa = PBXBuildFile; productRef = 2D70A6AEF10BF8497E0B2026 /* MapLibre */; };
+		296EA7FB158DC2593CDFD59C /* StateVisitManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C54D751EC55B8A7D260E38A /* StateVisitManager.swift */; };
 		2BC604C7BC556C3CC76B571A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 24567802EB06D9971337706F /* Assets.xcassets */; };
 		A5C5BC5F4E4B6BF21B286608 /* india_states.geojson in Resources */ = {isa = PBXBuildFile; fileRef = 8511B427ED541CF688BCBDC0 /* india_states.geojson */; };
+		C7B23E38AFC440F81B84FB61 /* IndiaMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF0E23BD024325DF5E41AEBF /* IndiaMapView.swift */; };
 		CAF230F973DC1BADB0D7518C /* BeenThereApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E0952C1722C8C4F95CB3D74 /* BeenThereApp.swift */; };
 		DB0C38DB697CF2B0FA870A57 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22C711256AA97E458E8FB5DC /* ContentView.swift */; };
 		E84B3AA302C942D249235475 /* india_states.json in Resources */ = {isa = PBXBuildFile; fileRef = 9DBF00A6AE3EC97BFA805238 /* india_states.json */; };
@@ -18,22 +19,13 @@
 /* Begin PBXFileReference section */
 		22C711256AA97E458E8FB5DC /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		24567802EB06D9971337706F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		5C54D751EC55B8A7D260E38A /* StateVisitManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StateVisitManager.swift; sourceTree = "<group>"; };
 		6E0952C1722C8C4F95CB3D74 /* BeenThereApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BeenThereApp.swift; sourceTree = "<group>"; };
 		8511B427ED541CF688BCBDC0 /* india_states.geojson */ = {isa = PBXFileReference; lastKnownFileType = text; path = india_states.geojson; sourceTree = "<group>"; };
 		927FDF49CA9D254ED3961125 /* BeenThere.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BeenThere.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9DBF00A6AE3EC97BFA805238 /* india_states.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = india_states.json; sourceTree = "<group>"; };
+		DF0E23BD024325DF5E41AEBF /* IndiaMapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IndiaMapView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
-
-/* Begin PBXFrameworksBuildPhase section */
-		09FE951CA1A153CACD35EBF6 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				146B5D430118642DCBAD5245 /* MapLibre in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-/* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
 		22202E3C5BB1961AE63FE7B7 /* App */ = {
@@ -66,6 +58,8 @@
 			isa = PBXGroup;
 			children = (
 				22C711256AA97E458E8FB5DC /* ContentView.swift */,
+				DF0E23BD024325DF5E41AEBF /* IndiaMapView.swift */,
+				5C54D751EC55B8A7D260E38A /* StateVisitManager.swift */,
 			);
 			path = UI;
 			sourceTree = "<group>";
@@ -97,7 +91,6 @@
 			buildPhases = (
 				61CB9B4AFE4A978E6B57FD74 /* Sources */,
 				7A5CADC833678211B0578F43 /* Resources */,
-				09FE951CA1A153CACD35EBF6 /* Frameworks */,
 			);
 			buildRules = (
 			);
@@ -105,7 +98,6 @@
 			);
 			name = BeenThere;
 			packageProductDependencies = (
-				2D70A6AEF10BF8497E0B2026 /* MapLibre */,
 			);
 			productName = BeenThere;
 			productReference = 927FDF49CA9D254ED3961125 /* BeenThere.app */;
@@ -129,9 +121,6 @@
 			);
 			mainGroup = 3BA41C03CFB502D48DBADBAE;
 			minimizedProjectReferenceProxies = 1;
-			packageReferences = (
-				BBB46C411CC6130D8AA9F4E7 /* XCRemoteSwiftPackageReference "maplibre-gl-native-distribution" */,
-			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = B78A898FA59383B0D79571B0 /* Products */;
 			projectDirPath = "";
@@ -162,6 +151,8 @@
 			files = (
 				CAF230F973DC1BADB0D7518C /* BeenThereApp.swift in Sources */,
 				DB0C38DB697CF2B0FA870A57 /* ContentView.swift in Sources */,
+				C7B23E38AFC440F81B84FB61 /* IndiaMapView.swift in Sources */,
+				296EA7FB158DC2593CDFD59C /* StateVisitManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -345,25 +336,6 @@
 			defaultConfigurationName = Debug;
 		};
 /* End XCConfigurationList section */
-
-/* Begin XCRemoteSwiftPackageReference section */
-		BBB46C411CC6130D8AA9F4E7 /* XCRemoteSwiftPackageReference "maplibre-gl-native-distribution" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/maplibre/maplibre-gl-native-distribution.git";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 6.0.0;
-			};
-		};
-/* End XCRemoteSwiftPackageReference section */
-
-/* Begin XCSwiftPackageProductDependency section */
-		2D70A6AEF10BF8497E0B2026 /* MapLibre */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = BBB46C411CC6130D8AA9F4E7 /* XCRemoteSwiftPackageReference "maplibre-gl-native-distribution" */;
-			productName = MapLibre;
-		};
-/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 41B885276C8BE5A855BAE2AE /* Project object */;
 }
