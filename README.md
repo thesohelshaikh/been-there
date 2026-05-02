@@ -12,10 +12,13 @@ BeenThere is a native iOS application designed to help you track your travels ac
 
 ## Features
 
-- **Interactive India Map:** Tap on states and union territories to mark them as visited.
-- **Dynamic Stats:** Track your progress with percentage-based coverage for different regions of India (North, South, East, West, Central, and Northeast).
-- **Regional Breakdown:** See exactly which states you've visited in each region.
-- **Persistence:** Your travel history is saved locally on your device.
+- **Interactive India Map:** Tap on states and union territories to explore and mark cities as visited.
+- **City-Level Tracking:** Track individual cities within each state. Distinguish between capital cities and regular visited cities.
+- **Customizable Appearance:** Personalize your map with custom colors for visited states, capital markers, and regular city markers. Supports both Standard and Satellite map styles.
+- **Dark Mode Support:** A fully adaptive UI that looks great in both light and dark appearances.
+- **Dynamic Stats:** Track your progress with percentage-based coverage for different regions of India, with specific breakdowns for States and Union Territories.
+- **Data Portability:** Export your travel history as a JSON file or import a previous backup to stay synced across devices.
+- **Persistence:** All data is saved securely on-device using `UserDefaults`.
 
 ## Tech Stack
 
@@ -29,9 +32,10 @@ BeenThere is a native iOS application designed to help you track your travels ac
 ```text
 ├── BeenThere/          # Main application code
 │   ├── App/            # App entry point and lifecycle
-│   ├── Resources/      # Assets and GeoJSON map data
+│   ├── Resources/      # Assets, GeoJSON map data, and city data
 │   └── UI/             # SwiftUI Views, ViewModels, and UI helpers
 ├── BeenThereTests/     # Unit tests for business logic and ViewModels
+├── screenshots/        # Application screenshots for documentation
 ├── openspec/           # Specifications and change history (OpenSpec workflow)
 ├── LICENSE             # MIT License file
 └── project.yml         # XcodeGen configuration
@@ -41,10 +45,12 @@ BeenThere is a native iOS application designed to help you track your travels ac
 
 The project follows the **MVVM (Model-View-ViewModel)** pattern:
 
-- **StateVisitManager:** The central source of truth for visited regions, handling persistence via `UserDefaults`.
+- **StateVisitManager:** Handles state-level visited status, derived from city visits.
+- **CityVisitManager:** The central source of truth for individual city visits and persistence.
 - **StatsViewModel:** Computes statistics, regional coverage, and progress percentages.
-- **IndiaMapView:** A `UIViewRepresentable` wrapper for `MKMapView` that handles GeoJSON rendering and tap interactions.
+- **IndiaMapView:** A `UIViewRepresentable` wrapper for `MKMapView` that handles GeoJSON rendering, custom markers, and tap interactions.
 - **StatsView:** Displays visual representations of travel progress.
+- **SettingsView:** Provides controls for appearance, map style, and data management.
 
 ## Getting Started
 
