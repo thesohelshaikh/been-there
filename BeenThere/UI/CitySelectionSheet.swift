@@ -111,15 +111,11 @@ struct CitySelectionSheet: View {
                 performSearch()
             }
             .toolbar {
-                ToolbarItem(placement: .navigationBarTrailing) {
+                ToolbarItem(placement: .cancellationAction) {
                     Button(action: { dismiss() }) {
-                        Image(systemName: "xmark")
-                            .font(.system(size: 12, weight: .bold))
-                            .foregroundStyle(.primary)
-                            .frame(width: 28, height: 28)
-                            .background(Color(UIColor.systemGray5))
-                            .clipShape(Circle())
+                        Label("Cancel", systemImage: "xmark")
                     }
+                    .buttonStyle(.borderless)
                 }
             }
         }
