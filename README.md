@@ -16,6 +16,28 @@ BeenThere is a native iOS application designed to help you track your travels ac
 - **XcodeGen:** Simplified project management and configuration.
 - **MVVM Architecture:** Clean separation of concerns for maintainability and testability.
 
+## Project Structure
+
+```text
+├── BeenThere/          # Main application code
+│   ├── App/            # App entry point and lifecycle
+│   ├── Resources/      # Assets and GeoJSON map data
+│   └── UI/             # SwiftUI Views, ViewModels, and UI helpers
+├── BeenThereTests/     # Unit tests for business logic and ViewModels
+├── openspec/           # Specifications and change history (OpenSpec workflow)
+├── LICENSE             # MIT License file
+└── project.yml         # XcodeGen configuration
+```
+
+## Architecture
+
+The project follows the **MVVM (Model-View-ViewModel)** pattern:
+
+- **StateVisitManager:** The central source of truth for visited regions, handling persistence via `UserDefaults`.
+- **StatsViewModel:** Computes statistics, regional coverage, and progress percentages.
+- **IndiaMapView:** A `UIViewRepresentable` wrapper for `MKMapView` that handles GeoJSON rendering and tap interactions.
+- **StatsView:** Displays visual representations of travel progress.
+
 ## Getting Started
 
 ### Prerequisites
@@ -31,7 +53,7 @@ BeenThere is a native iOS application designed to help you track your travels ac
    xcodegen generate
    ```
 3. Open `BeenThere.xcodeproj` in Xcode.
-4. Select a simulator or physical device and run the app (Cmd+R).
+4. Select a simulator or physical device (iOS 16.0+) and run the app (Cmd+R).
 
 ## Development Workflow
 
@@ -49,6 +71,10 @@ Run unit tests via Xcode (Cmd+U) or using `xcodebuild`:
 ```bash
 xcodebuild test -scheme BeenThere -destination 'platform=iOS Simulator,name=iPhone 15'
 ```
+
+## Data Sources
+
+The map boundaries are provided by `india_states.geojson` located in the `Resources` directory. This data is used by `IndiaMapView` to render state polygons on the `MKMapView`.
 
 ## License
 
