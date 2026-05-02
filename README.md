@@ -2,6 +2,14 @@
 
 BeenThere is a native iOS application designed to help you track your travels across India. It provides an interactive map where you can mark visited states and union territories, and view detailed statistics about your regional coverage.
 
+## Screenshots
+
+<p align="center">
+  <img src="screenshots/map.png" width="30%" alt="Map View" />
+  <img src="screenshots/stats.png" width="30%" alt="Stats View" />
+  <img src="screenshots/settings.png" width="30%" alt="Settings View" />
+</p>
+
 ## Features
 
 - **Interactive India Map:** Tap on states and union territories to mark them as visited.
