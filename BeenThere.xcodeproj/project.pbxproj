@@ -7,12 +7,14 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		CE3295CF-D339-4AE6-8D48-0224909A2B64 /* Color+Hex.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4129B7D0-98B3-4880-8586-78E1CCDF5724 /* Color+Hex.swift */; };
+		1B318848BA59461C0CB55D31 /* Color+Hex.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D7CC0C347711E8C3E823DC9 /* Color+Hex.swift */; };
 		296EA7FB158DC2593CDFD59C /* StateVisitManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C54D751EC55B8A7D260E38A /* StateVisitManager.swift */; };
-		807823C0-97D4-4038-A389-054DDA56F1B3 /* StatsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 077600D0-E126-491D-A589-4367D30C585A /* StatsView.swift */; };
-		CD5FD183-EFD1-484A-BECA-66A279987F0E /* StatsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D102EA51-DCF8-494C-9290-47DC5527D14B /* StatsViewModel.swift */; };
 		2BC604C7BC556C3CC76B571A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 24567802EB06D9971337706F /* Assets.xcassets */; };
+		52F0E8FF66DA53F5279E984B /* StatsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E936BFA205F6FC6CCC79D18 /* StatsViewModel.swift */; };
+		964AE3FC642BE5432E2ADBD3 /* CityVisitManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE24B821C903539296F7E64 /* CityVisitManager.swift */; };
+		A3A795D50275AB936C914BFD /* StatsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 009CF4965EF414EE1B5C91FC /* StatsView.swift */; };
 		A5C5BC5F4E4B6BF21B286608 /* india_states.geojson in Resources */ = {isa = PBXBuildFile; fileRef = 8511B427ED541CF688BCBDC0 /* india_states.geojson */; };
+		B3D3E610C473D13BE0A7D92A /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68D9986380DA1BBC6AB293BB /* SettingsView.swift */; };
 		C7B23E38AFC440F81B84FB61 /* IndiaMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF0E23BD024325DF5E41AEBF /* IndiaMapView.swift */; };
 		CAF230F973DC1BADB0D7518C /* BeenThereApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E0952C1722C8C4F95CB3D74 /* BeenThereApp.swift */; };
 		DB0C38DB697CF2B0FA870A57 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22C711256AA97E458E8FB5DC /* ContentView.swift */; };
@@ -20,16 +22,18 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		4129B7D0-98B3-4880-8586-78E1CCDF5724 /* Color+Hex.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+Hex.swift"; sourceTree = "<group>"; };
+		009CF4965EF414EE1B5C91FC /* StatsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatsView.swift; sourceTree = "<group>"; };
+		0D7CC0C347711E8C3E823DC9 /* Color+Hex.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+Hex.swift"; sourceTree = "<group>"; };
 		22C711256AA97E458E8FB5DC /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		24567802EB06D9971337706F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		5C54D751EC55B8A7D260E38A /* StateVisitManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StateVisitManager.swift; sourceTree = "<group>"; };
-		077600D0-E126-491D-A589-4367D30C585A /* StatsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatsView.swift; sourceTree = "<group>"; };
-		D102EA51-DCF8-494C-9290-47DC5527D14B /* StatsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatsViewModel.swift; sourceTree = "<group>"; };
+		68D9986380DA1BBC6AB293BB /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		6E0952C1722C8C4F95CB3D74 /* BeenThereApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BeenThereApp.swift; sourceTree = "<group>"; };
-		8511B427ED541CF688BCBDC0 /* india_states.geojson */ = {isa = PBXFileReference; lastKnownFileType = text; path = india_states.geojson; sourceTree = "<group>"; };
-		927FDF49CA9D254ED3961125 /* BeenThere.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BeenThere.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		8511B427ED541CF688BCBDC0 /* india_states.geojson */ = {isa = PBXFileReference; path = india_states.geojson; sourceTree = "<group>"; };
+		927FDF49CA9D254ED3961125 /* BeenThere.app */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.application; path = BeenThere.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9DBF00A6AE3EC97BFA805238 /* india_states.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = india_states.json; sourceTree = "<group>"; };
+		9E936BFA205F6FC6CCC79D18 /* StatsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatsViewModel.swift; sourceTree = "<group>"; };
+		CEE24B821C903539296F7E64 /* CityVisitManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CityVisitManager.swift; sourceTree = "<group>"; };
 		DF0E23BD024325DF5E41AEBF /* IndiaMapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IndiaMapView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -63,12 +67,14 @@
 		58DFC25648B42D7B67D0DCC1 /* UI */ = {
 			isa = PBXGroup;
 			children = (
+				CEE24B821C903539296F7E64 /* CityVisitManager.swift */,
+				0D7CC0C347711E8C3E823DC9 /* Color+Hex.swift */,
 				22C711256AA97E458E8FB5DC /* ContentView.swift */,
 				DF0E23BD024325DF5E41AEBF /* IndiaMapView.swift */,
+				68D9986380DA1BBC6AB293BB /* SettingsView.swift */,
 				5C54D751EC55B8A7D260E38A /* StateVisitManager.swift */,
-				4129B7D0-98B3-4880-8586-78E1CCDF5724 /* Color+Hex.swift */,
-				077600D0-E126-491D-A589-4367D30C585A /* StatsView.swift */,
-				D102EA51-DCF8-494C-9290-47DC5527D14B /* StatsViewModel.swift */,
+				009CF4965EF414EE1B5C91FC /* StatsView.swift */,
+				9E936BFA205F6FC6CCC79D18 /* StatsViewModel.swift */,
 			);
 			path = UI;
 			sourceTree = "<group>";
@@ -120,6 +126,8 @@
 			attributes = {
 				BuildIndependentTargetsInParallel = YES;
 				LastUpgradeCheck = 1430;
+				TargetAttributes = {
+				};
 			};
 			buildConfigurationList = AA2DD72CC4289FC2C6456F49 /* Build configuration list for PBXProject "BeenThere" */;
 			developmentRegion = en;
@@ -159,12 +167,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				CAF230F973DC1BADB0D7518C /* BeenThereApp.swift in Sources */,
+				964AE3FC642BE5432E2ADBD3 /* CityVisitManager.swift in Sources */,
+				1B318848BA59461C0CB55D31 /* Color+Hex.swift in Sources */,
 				DB0C38DB697CF2B0FA870A57 /* ContentView.swift in Sources */,
 				C7B23E38AFC440F81B84FB61 /* IndiaMapView.swift in Sources */,
+				B3D3E610C473D13BE0A7D92A /* SettingsView.swift in Sources */,
 				296EA7FB158DC2593CDFD59C /* StateVisitManager.swift in Sources */,
-				CE3295CF-D339-4AE6-8D48-0224909A2B64 /* Color+Hex.swift in Sources */,
-				807823C0-97D4-4038-A389-054DDA56F1B3 /* StatsView.swift in Sources */,
-				CD5FD183-EFD1-484A-BECA-66A279987F0E /* StatsViewModel.swift in Sources */,
+				A3A795D50275AB936C914BFD /* StatsView.swift in Sources */,
+				52F0E8FF66DA53F5279E984B /* StatsViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -239,7 +249,6 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				DEVELOPMENT_TEAM = FY2HBP6LC5;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -262,7 +271,6 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				DEVELOPMENT_TEAM = FY2HBP6LC5;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
