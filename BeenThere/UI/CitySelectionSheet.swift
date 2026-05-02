@@ -111,11 +111,8 @@ struct CitySelectionSheet: View {
                 performSearch()
             }
             .toolbar {
-                ToolbarItem(placement: .cancellationAction) {
-                    Button(action: { dismiss() }) {
-                        Label("Cancel", systemImage: "xmark")
-                    }
-                    .buttonStyle(.borderless)
+                ToolbarItem(placement: .primaryAction) {
+                    Button("Cancel", systemImage:"xmark", action: { dismiss() }).buttonStyle(.plain)
                 }
             }
         }
