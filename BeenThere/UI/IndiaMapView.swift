@@ -9,6 +9,8 @@ struct IndiaMapView: UIViewRepresentable {
     @ObservedObject var stateVisitManager: StateVisitManager
     @ObservedObject var cityVisitManager: CityVisitManager
     let visitedStateColor: String
+    let capitalMarkerColor: String
+    let cityMarkerColor: String
     
     @AppStorage("mapStyle") private var mapStyle = "standard"
     
@@ -184,11 +186,13 @@ struct IndiaMapView: UIViewRepresentable {
                 let isCapital = CapitalManager.shared.capital(for: state) == title
 
                 let size: CGFloat = 8
-                let color: UIColor = isCapital ? .systemYellow : .systemGreen
+                let colorHex = isCapital ? parent.capitalMarkerColor : parent.cityMarkerColor
+                let color = UIColor(Color(hex: colorHex))
 
                 annotationView?.image = circleImage(size: size, color: color)
             } else {
-                annotationView?.image = circleImage(size: 6, color: .systemGreen)
+                let color = UIColor(Color(hex: parent.cityMarkerColor))
+                annotationView?.image = circleImage(size: 6, color: color)
             }
             
             return annotationView

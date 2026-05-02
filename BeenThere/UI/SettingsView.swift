@@ -27,6 +27,8 @@ struct SettingsView: View {
     
     @AppStorage("isDarkMode") private var isDarkMode = false
     @AppStorage("visitedStateColor") private var visitedStateColor = "2D6A4F"
+    @AppStorage("capitalMarkerColor") private var capitalMarkerColor = "FFD700"
+    @AppStorage("cityMarkerColor") private var cityMarkerColor = "34C759"
     @AppStorage("mapStyle") private var mapStyle = "standard"
     
     @State private var showingExportSheet = false
@@ -42,13 +44,21 @@ struct SettingsView: View {
                     ColorPicker("Visited State Color", selection: Binding(
                         get: { Color(hex: visitedStateColor) },
                         set: { newColor in
-                            // Simple hex conversion for storage
-                            if let uiColor = UIColor(newColor).cgColor.components {
-                                let r = Int(uiColor[0] * 255)
-                                let g = Int(uiColor[1] * 255)
-                                let b = Int(uiColor[2] * 255)
-                                visitedStateColor = String(format: "%02X%02X%02X", r, g, b)
-                            }
+                            visitedStateColor = colorToHex(newColor)
+                        }
+                    ))
+                    
+                    ColorPicker("Capital Marker Color", selection: Binding(
+                        get: { Color(hex: capitalMarkerColor) },
+                        set: { newColor in
+                            capitalMarkerColor = colorToHex(newColor)
+                        }
+                    ))
+                    
+                    ColorPicker("City Marker Color", selection: Binding(
+                        get: { Color(hex: cityMarkerColor) },
+                        set: { newColor in
+                            cityMarkerColor = colorToHex(newColor)
                         }
                     ))
                 }
@@ -59,6 +69,16 @@ struct SettingsView: View {
                         Text("Satellite").tag("satellite")
                     }
                     .pickerStyle(SegmentedPickerStyle())
+                }
+                
+                Section {
+                    Button(role: .destructive, action: resetToDefaults) {
+                        HStack {
+                            Spacer()
+                            Text("Reset to Defaults")
+                            Spacer()
+                        }
+                    }
                 }
                 
                 Section(header: Text("Data Management")) {
@@ -120,6 +140,24 @@ struct SettingsView: View {
                 }
             }
         }
+    }
+    
+    private func resetToDefaults() {
+        visitedStateColor = "2D6A4F"
+        capitalMarkerColor = "FFD700"
+        cityMarkerColor = "34C759"
+        mapStyle = "standard"
+        isDarkMode = false
+    }
+    
+    private func colorToHex(_ color: Color) -> String {
+        if let uiColor = UIColor(color).cgColor.components {
+            let r = Int(uiColor[0] * 255)
+            let g = Int(uiColor[1] * 255)
+            let b = Int(uiColor[2] * 255)
+            return String(format: "%02X%02X%02X", r, g, b)
+        }
+        return "000000"
     }
 }
 

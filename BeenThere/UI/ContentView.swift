@@ -10,6 +10,8 @@ struct ContentView: View {
     @StateObject var stateVisitManager: StateVisitManager
 
     @AppStorage("visitedStateColor") private var visitedStateColor = "2D6A4F"
+    @AppStorage("capitalMarkerColor") private var capitalMarkerColor = "FFD700"
+    @AppStorage("cityMarkerColor") private var cityMarkerColor = "34C759"
 
     @State private var selectedTab = 0
     @State private var selectedState: StateItem? = nil
@@ -30,7 +32,13 @@ struct ContentView: View {
                 self.selectedTab = newValue
             }
         )) {
-            IndiaMapView(stateVisitManager: stateVisitManager, cityVisitManager: cityVisitManager, visitedStateColor: visitedStateColor)
+            IndiaMapView(
+                stateVisitManager: stateVisitManager,
+                cityVisitManager: cityVisitManager,
+                visitedStateColor: visitedStateColor,
+                capitalMarkerColor: capitalMarkerColor,
+                cityMarkerColor: cityMarkerColor
+            )
                 .ignoresSafeArea()
                 .tabItem {
                     Label("Map", systemImage: "map")
