@@ -132,14 +132,22 @@ struct CitySelectionSheet: View {
         }
         isSearching = true
         
+        let query = "\(searchText), \(stateName), India"
+        print("🔍 Searching for city: \(query)")
+        
         let request = MKLocalSearch.Request()
-        request.naturalLanguageQuery = "\(searchText), \(stateName), India"
+        request.naturalLanguageQuery = query
         request.resultTypes = .address
         
         let search = MKLocalSearch(request: request)
         search.start { response, error in
             isSearching = false
+            if let error = error {
+                print("❌ City search failed: \(error.localizedDescription)")
+            }
+            
             if let response = response {
+                print("✅ Found \(response.mapItems.count) search results")
                 self.searchResults = response.mapItems.filter { item in
                     let isNotPOI = item.pointOfInterestCategory == nil
                     let title = item.placemark.title ?? ""

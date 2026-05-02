@@ -67,15 +67,27 @@ class CityVisitManager: ObservableObject {
     }
     
     func searchAndMarkCity(name: String, state: String, isCapital: Bool = false, completion: ((Bool) -> Void)? = nil) {
+        let query = "\(name), \(state), India"
+        print("🔍 Searching for capital: \(query)")
+        
         let searchRequest = MKLocalSearch.Request()
-        searchRequest.naturalLanguageQuery = "\(name), \(state), India"
+        searchRequest.naturalLanguageQuery = query
         
         let search = MKLocalSearch(request: searchRequest)
         search.start { response, error in
-            guard let coordinate = response?.mapItems.first?.placemark.coordinate else {
+            if let error = error {
+                print("❌ Search failed with error: \(error.localizedDescription)")
                 completion?(false)
                 return
             }
+            
+            guard let coordinate = response?.mapItems.first?.placemark.coordinate else {
+                print("⚠️ No results found for query: \(query)")
+                completion?(false)
+                return
+            }
+            
+            print("✅ Found coordinate for \(name): \(coordinate.latitude), \(coordinate.longitude)")
             
             let city = City(
                 id: "\(name)-\(state)",
