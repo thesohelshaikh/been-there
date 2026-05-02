@@ -8,16 +8,18 @@ struct StateItem: Identifiable {
 struct ContentView: View {
     @StateObject var cityVisitManager = CityVisitManager()
     @StateObject var stateVisitManager: StateVisitManager
-    
+
+    @AppStorage("visitedStateColor") private var visitedStateColor = "2D6A4F"
+
     @State private var selectedTab = 0
     @State private var selectedState: StateItem? = nil
-    
+
     init() {
         let cityManager = CityVisitManager()
         _cityVisitManager = StateObject(wrappedValue: cityManager)
         _stateVisitManager = StateObject(wrappedValue: StateVisitManager(cityVisitManager: cityManager))
     }
-    
+
     var body: some View {
         TabView(selection: Binding(
             get: { self.selectedTab },
@@ -28,13 +30,13 @@ struct ContentView: View {
                 self.selectedTab = newValue
             }
         )) {
-            IndiaMapView(stateVisitManager: stateVisitManager, cityVisitManager: cityVisitManager)
+            IndiaMapView(stateVisitManager: stateVisitManager, cityVisitManager: cityVisitManager, visitedStateColor: visitedStateColor)
                 .ignoresSafeArea()
                 .tabItem {
                     Label("Map", systemImage: "map")
                 }
                 .tag(0)
-            
+
             StatsView(viewModel: StatsViewModel(stateVisitManager: stateVisitManager))
                 .tabItem {
                     Label("Stats", systemImage: "chart.bar.fill")

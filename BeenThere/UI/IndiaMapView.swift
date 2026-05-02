@@ -8,8 +8,8 @@ class StatePolygon: MKPolygon {
 struct IndiaMapView: UIViewRepresentable {
     @ObservedObject var stateVisitManager: StateVisitManager
     @ObservedObject var cityVisitManager: CityVisitManager
+    let visitedStateColor: String
     
-    @AppStorage("visitedStateColor") private var visitedStateColor = "2D6A4F"
     @AppStorage("mapStyle") private var mapStyle = "standard"
     
     func makeUIView(context: Context) -> MKMapView {
@@ -33,6 +33,7 @@ struct IndiaMapView: UIViewRepresentable {
     }
     
     func updateUIView(_ uiView: MKMapView, context: Context) {
+        context.coordinator.parent = self
         uiView.mapType = mapStyle == "satellite" ? .satellite : .standard
         
         // Redraw overlays
