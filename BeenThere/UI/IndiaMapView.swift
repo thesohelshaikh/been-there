@@ -182,7 +182,7 @@ struct IndiaMapView: UIViewRepresentable {
             if let title = annotation.title, let state = parent.cityVisitManager.visitedCities.first(where: { $0.name == title })?.state {
                 let isCapital = CapitalManager.shared.capital(for: state) == title
 
-                let size: CGFloat = 6
+                let size: CGFloat = 8
                 let color: UIColor = isCapital ? .systemYellow : .systemGreen
 
                 annotationView?.image = circleImage(size: size, color: color)
