@@ -32,7 +32,7 @@ class StatsViewModel: ObservableObject {
         Entity(name: "Delhi", region: .north, type: .ut),
         Entity(name: "Haryana", region: .north, type: .state),
         Entity(name: "Himachal Pradesh", region: .north, type: .state),
-        Entity(name: "Jammu and Kashmir", region: .north, type: .ut),
+        Entity(name: "Jammu & Kashmir", region: .north, type: .ut),
         Entity(name: "Punjab", region: .north, type: .state),
         Entity(name: "Rajasthan", region: .north, type: .state),
         Entity(name: "Uttar Pradesh", region: .north, type: .state),
@@ -45,7 +45,7 @@ class StatsViewModel: ObservableObject {
         Entity(name: "Kerala", region: .south, type: .state),
         Entity(name: "Tamil Nadu", region: .south, type: .state),
         Entity(name: "Telangana", region: .south, type: .state),
-        Entity(name: "Andaman and Nicobar Islands", region: .south, type: .ut),
+        Entity(name: "Andaman & Nicobar", region: .south, type: .ut),
         Entity(name: "Lakshadweep", region: .south, type: .ut),
         Entity(name: "Puducherry", region: .south, type: .ut),
         // West
