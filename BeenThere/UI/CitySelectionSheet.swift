@@ -113,14 +113,13 @@ struct CitySelectionSheet: View {
             .toolbar {
                 ToolbarItem(placement: .navigationBarTrailing) {
                     Button(action: { dismiss() }) {
-                        Image(systemName: "checkmark.circle.fill")
-                            .symbolRenderingMode(.palette)
-                            .foregroundStyle(.white, Color.accentColor)
-                            .font(.system(size: 26, weight: .bold))
-                            .background(Color.clear)
+                        Image(systemName: "xmark")
+                            .font(.system(size: 12, weight: .bold))
+                            .foregroundStyle(.primary)
+                            .frame(width: 28, height: 28)
+                            .background(Color(UIColor.systemGray5))
                             .clipShape(Circle())
                     }
-                    .buttonStyle(.plain)
                 }
             }
         }
@@ -135,7 +134,6 @@ struct CitySelectionSheet: View {
         
         let request = MKLocalSearch.Request()
         request.naturalLanguageQuery = "\(searchText), \(stateName), India"
-        // Target addresses/localities rather than businesses
         request.resultTypes = .address
         
         let search = MKLocalSearch(request: request)
@@ -143,8 +141,6 @@ struct CitySelectionSheet: View {
             isSearching = false
             if let response = response {
                 self.searchResults = response.mapItems.filter { item in
-                    // Only include items that are not specific points of interest (shops, etc.)
-                    // and match the state or country.
                     let isNotPOI = item.pointOfInterestCategory == nil
                     let title = item.placemark.title ?? ""
                     let matchesState = title.localizedCaseInsensitiveContains(stateName) || 
@@ -175,7 +171,6 @@ struct CitySelectionSheet: View {
             cityVisitManager.toggleVisit(for: city)
         }
         
-        // Clear search after adding
         searchText = ""
         searchResults = []
     }
