@@ -6,7 +6,8 @@ class StatePolygon: MKPolygon {
 }
 
 struct IndiaMapView: UIViewRepresentable {
-    @ObservedObject var visitManager: StateVisitManager
+    @ObservedObject var stateVisitManager: StateVisitManager
+    @ObservedObject var cityVisitManager: CityVisitManager
     
     @AppStorage("visitedStateColor") private var visitedStateColor = "2D6A4F"
     @AppStorage("mapStyle") private var mapStyle = "standard"
@@ -14,31 +15,32 @@ struct IndiaMapView: UIViewRepresentable {
     func makeUIView(context: Context) -> MKMapView {
         let mapView = MKMapView()
         mapView.delegate = context.coordinator
+        context.coordinator.mapView = mapView
         
-        // Ensure the map itself doesn't have internal margins
         mapView.insetsLayoutMarginsFromSafeArea = false
         
-        // Center on India - Adjusted span to be tighter
         let indiaCenter = CLLocationCoordinate2D(latitude: 22.5937, longitude: 78.9629)
         let region = MKCoordinateRegion(center: indiaCenter, span: MKCoordinateSpan(latitudeDelta: 30, longitudeDelta: 30))
         mapView.setRegion(region, animated: false)
         
-        // Add Tap Gesture
         let tapGesture = UITapGestureRecognizer(target: context.coordinator, action: #selector(Coordinator.handleTap(_:)))
         mapView.addGestureRecognizer(tapGesture)
         
         loadGeoJSON(into: mapView)
+        updateAnnotations(on: mapView)
         
         return mapView
     }
     
     func updateUIView(_ uiView: MKMapView, context: Context) {
-        // Update map type
         uiView.mapType = mapStyle == "satellite" ? .satellite : .standard
         
-        // Redraw overlays when visitManager or settings change
+        // Redraw overlays
         uiView.removeOverlays(uiView.overlays)
         loadGeoJSON(into: uiView)
+        
+        // Update annotations
+        updateAnnotations(on: uiView)
     }
     
     func makeCoordinator() -> Coordinator {
@@ -90,11 +92,37 @@ struct IndiaMapView: UIViewRepresentable {
         }
     }
     
+    private func updateAnnotations(on mapView: MKMapView) {
+        mapView.removeAnnotations(mapView.annotations)
+        
+        var newAnnotations: [MKAnnotation] = []
+        
+        for city in cityVisitManager.visitedCities {
+            let annotation = MKPointAnnotation()
+            annotation.coordinate = city.coordinate
+            annotation.title = city.name
+            annotation.subtitle = city.isCapital ? "Capital" : nil
+            newAnnotations.append(annotation)
+        }
+        
+        mapView.addAnnotations(newAnnotations)
+    }
+    
     class Coordinator: NSObject, MKMapViewDelegate {
         var parent: IndiaMapView
+        weak var mapView: MKMapView?
         
         init(_ parent: IndiaMapView) {
             self.parent = parent
+            super.init()
+            NotificationCenter.default.addObserver(self, selector: #selector(handleCenterMap), name: NSNotification.Name("CenterMap"), object: nil)
+        }
+        
+        @objc func handleCenterMap() {
+            guard let mapView = mapView else { return }
+            let indiaCenter = CLLocationCoordinate2D(latitude: 22.5937, longitude: 78.9629)
+            let region = MKCoordinateRegion(center: indiaCenter, span: MKCoordinateSpan(latitudeDelta: 30, longitudeDelta: 30))
+            mapView.setRegion(region, animated: true)
         }
         
         @objc func handleTap(_ gesture: UITapGestureRecognizer) {
@@ -110,7 +138,7 @@ struct IndiaMapView: UIViewRepresentable {
                     
                     if renderer.path.contains(rendererPoint) {
                         if let stateName = polygon.stateName {
-                            parent.visitManager.toggleVisit(for: stateName)
+                            NotificationCenter.default.post(name: NSNotification.Name("StateTapped"), object: stateName)
                             return
                         }
                     }
@@ -123,7 +151,7 @@ struct IndiaMapView: UIViewRepresentable {
                 let renderer = MKPolygonRenderer(polygon: statePolygon)
                 
                 let stateName = statePolygon.stateName ?? ""
-                if parent.visitManager.isVisited(stateName) {
+                if parent.stateVisitManager.isVisited(stateName) {
                     renderer.fillColor = UIColor(Color(hex: parent.visitedStateColor)).withAlphaComponent(0.6)
                 } else {
                     renderer.fillColor = UIColor.systemGray.withAlphaComponent(0.3)
@@ -135,6 +163,46 @@ struct IndiaMapView: UIViewRepresentable {
                 return renderer
             }
             return MKOverlayRenderer(overlay: overlay)
+        }
+        
+        func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
+            if annotation is MKUserLocation { return nil }
+            
+            let identifier = "CityAnnotation"
+            var annotationView = mapView.dequeueReusableAnnotationView(withIdentifier: identifier)
+            
+            if annotationView == nil {
+                annotationView = MKAnnotationView(annotation: annotation, reuseIdentifier: identifier)
+                annotationView?.canShowCallout = true
+            } else {
+                annotationView?.annotation = annotation
+            }
+            
+            // Check if it's a capital
+            if let title = annotation.title, let state = parent.cityVisitManager.visitedCities.first(where: { $0.name == title })?.state {
+                let isCapital = CapitalManager.shared.capital(for: state) == title
+
+                let size: CGFloat = 6
+                let color: UIColor = isCapital ? .systemYellow : .systemGreen
+
+                annotationView?.image = circleImage(size: size, color: color)
+            } else {
+                annotationView?.image = circleImage(size: 6, color: .systemGreen)
+            }
+            
+            return annotationView
+        }
+        
+        private func circleImage(size: CGFloat, color: UIColor) -> UIImage {
+            let renderer = UIGraphicsImageRenderer(size: CGSize(width: size, height: size))
+            return renderer.image { context in
+                color.setFill()
+                context.cgContext.fillEllipse(in: CGRect(x: 0, y: 0, width: size, height: size))
+                
+                UIColor.white.setStroke()
+                context.cgContext.setLineWidth(1)
+                context.cgContext.strokeEllipse(in: CGRect(x: 0.5, y: 0.5, width: size - 1, height: size - 1))
+            }
         }
     }
 }

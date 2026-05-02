@@ -54,6 +54,45 @@ class CityVisitManager: ObservableObject {
         visitedCities.filter { $0.state == state }.sorted { $0.name < $1.name }
     }
     
+    func exportData() -> Data? {
+        try? JSONEncoder().encode(Array(visitedCities))
+    }
+    
+    func importData(from data: Data) -> Bool {
+        guard let array = try? JSONDecoder().decode([City].self, from: data) else {
+            return false
+        }
+        visitedCities = Set(array)
+        return true
+    }
+    
+    func searchAndMarkCity(name: String, state: String, isCapital: Bool = false, completion: ((Bool) -> Void)? = nil) {
+        let searchRequest = MKLocalSearch.Request()
+        searchRequest.naturalLanguageQuery = "\(name), \(state), India"
+        
+        let search = MKLocalSearch(request: searchRequest)
+        search.start { response, error in
+            guard let coordinate = response?.mapItems.first?.placemark.coordinate else {
+                completion?(false)
+                return
+            }
+            
+            let city = City(
+                id: "\(name)-\(state)",
+                name: name,
+                state: state,
+                latitude: coordinate.latitude,
+                longitude: coordinate.longitude,
+                isCapital: isCapital
+            )
+            
+            DispatchQueue.main.async {
+                self.visitedCities.insert(city)
+                completion?(true)
+            }
+        }
+    }
+    
     private func save() {
         if let encoded = try? JSONEncoder().encode(visitedCities) {
             UserDefaults.standard.set(encoded, forKey: storageKey)
@@ -77,38 +116,11 @@ class CityVisitManager: ObservableObject {
         
         for stateName in legacyStates {
             if let capitalName = capitals[stateName] {
-                // Perform a one-time migration search for coordinates
-                searchAndMarkCapital(name: capitalName, state: stateName)
+                searchAndMarkCity(name: capitalName, state: stateName, isCapital: true)
             }
         }
         
-        // Clear legacy data after migration to avoid repeated attempts
         UserDefaults.standard.removeObject(forKey: legacyStatesKey)
-    }
-    
-    private func searchAndMarkCapital(name: String, state: String) {
-        let searchRequest = MKLocalSearch.Request()
-        searchRequest.naturalLanguageQuery = "\(name), \(state), India"
-        
-        let search = MKLocalSearch(request: searchRequest)
-        search.start { response, error in
-            guard let coordinate = response?.mapItems.first?.placemark.coordinate else {
-                return
-            }
-            
-            let city = City(
-                id: "\(name)-\(state)",
-                name: name,
-                state: state,
-                latitude: coordinate.latitude,
-                longitude: coordinate.longitude,
-                isCapital: true
-            )
-            
-            DispatchQueue.main.async {
-                self.visitedCities.insert(city)
-            }
-        }
     }
 }
 

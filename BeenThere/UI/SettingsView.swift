@@ -124,5 +124,5 @@ struct SettingsView: View {
 }
 
 #Preview {
-    SettingsView(visitManager: StateVisitManager())
+    SettingsView(visitManager: StateVisitManager(cityVisitManager: CityVisitManager()))
 }

@@ -25,6 +25,14 @@ class StateVisitManager: ObservableObject {
         visitedStates.contains(stateName)
     }
     
+    func exportData() -> Data? {
+        cityVisitManager.exportData()
+    }
+    
+    func importData(from data: Data) -> Bool {
+        cityVisitManager.importData(from: data)
+    }
+    
     private func updateVisitedStates() {
         let capitals = CapitalManager.shared.allCapitals()
         var newVisitedStates: Set<String> = []
@@ -34,9 +42,6 @@ class StateVisitManager: ObservableObject {
                 newVisitedStates.insert(state)
             }
         }
-        
-        // Handle UTs or entities without explicit capitals if needed
-        // (currently following "Capital Only" rule as per user instruction)
         
         if self.visitedStates != newVisitedStates {
             self.visitedStates = newVisitedStates

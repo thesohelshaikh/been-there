@@ -1,11 +1,4 @@
-## Requirements
-
-### Requirement: Capital City Recognition
-The system SHALL maintain a mapping of Indian states to their respective capital cities.
-
-#### Scenario: Verify Capital status
-- **WHEN** a city is marked as visited
-- **THEN** the system SHALL check if that city is the registered capital of any state
+## MODIFIED Requirements
 
 ### Requirement: Green Highlight for Visited Capitals
 The system SHALL apply a green overlay to a state on the map if its capital city has been visited.

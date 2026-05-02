@@ -161,6 +161,6 @@ struct RegionProgressRow: View {
 
 struct StatsView_Previews: PreviewProvider {
     static var previews: some View {
-        StatsView(viewModel: StatsViewModel(stateVisitManager: StateVisitManager()))
+        StatsView(viewModel: StatsViewModel(stateVisitManager: StateVisitManager(cityVisitManager: CityVisitManager())))
     }
 }

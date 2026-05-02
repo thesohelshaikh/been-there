@@ -1,12 +1,16 @@
 import SwiftUI
 
+struct StateItem: Identifiable {
+    let name: String
+    var id: String { name }
+}
+
 struct ContentView: View {
     @StateObject var cityVisitManager = CityVisitManager()
     @StateObject var stateVisitManager: StateVisitManager
     
     @State private var selectedTab = 0
-    @State private var selectedStateName: String? = nil
-    @State private var showingCitySheet = false
+    @State private var selectedState: StateItem? = nil
     
     init() {
         let cityManager = CityVisitManager()
@@ -15,9 +19,17 @@ struct ContentView: View {
     }
     
     var body: some View {
-        TabView(selection: $selectedTab) {
-            IndiaMapView(visitManager: stateVisitManager)
-                .ignoresSafeArea(edges: .top)
+        TabView(selection: Binding(
+            get: { self.selectedTab },
+            set: { newValue in
+                if newValue == self.selectedTab && newValue == 0 {
+                    NotificationCenter.default.post(name: NSNotification.Name("CenterMap"), object: nil)
+                }
+                self.selectedTab = newValue
+            }
+        )) {
+            IndiaMapView(stateVisitManager: stateVisitManager, cityVisitManager: cityVisitManager)
+                .ignoresSafeArea()
                 .tabItem {
                     Label("Map", systemImage: "map")
                 }
@@ -42,17 +54,14 @@ struct ContentView: View {
                 .tag(3)
         }
         .accentColor(Color(hex: "2D6A4F"))
-        // Present sheet when a state is tapped (Task 3.2)
-        .sheet(isPresented: $showingCitySheet) {
-            if let stateName = selectedStateName {
-                // CitySelectionSheet will be implemented in Task 2.1
-                Text("Select cities in \(stateName)")
-            }
+        .sheet(item: $selectedState) { item in
+            CitySelectionSheet(stateName: item.name, cityVisitManager: cityVisitManager)
+                .presentationDetents([.medium, .large])
+                .presentationDragIndicator(.visible)
         }
         .onReceive(NotificationCenter.default.publisher(for: NSNotification.Name("StateTapped"))) { notification in
             if let stateName = notification.object as? String {
-                self.selectedStateName = stateName
-                self.showingCitySheet = true
+                self.selectedState = StateItem(name: stateName)
             }
         }
     }

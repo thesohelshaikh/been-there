@@ -17,3 +17,15 @@ targets:
         INFOPLIST_KEY_UIApplicationSceneManifest_Generation: YES
         INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents: YES
         INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone: UIInterfaceOrientationPortrait
+
+  BeenThereTests:
+    type: bundle.unit-test
+    platform: iOS
+    deploymentTarget: "16.0"
+    sources:
+      - BeenThereTests
+    dependencies:
+      - target: BeenThere
+    settings:
+      base:
+        GENERATE_INFOPLIST_FILE: YES
