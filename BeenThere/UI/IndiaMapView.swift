@@ -8,6 +8,9 @@ class StatePolygon: MKPolygon {
 struct IndiaMapView: UIViewRepresentable {
     @ObservedObject var visitManager: StateVisitManager
     
+    @AppStorage("visitedStateColor") private var visitedStateColor = "2D6A4F"
+    @AppStorage("mapStyle") private var mapStyle = "standard"
+    
     func makeUIView(context: Context) -> MKMapView {
         let mapView = MKMapView()
         mapView.delegate = context.coordinator
@@ -30,7 +33,10 @@ struct IndiaMapView: UIViewRepresentable {
     }
     
     func updateUIView(_ uiView: MKMapView, context: Context) {
-        // Redraw overlays when visitManager changes
+        // Update map type
+        uiView.mapType = mapStyle == "satellite" ? .satellite : .standard
+        
+        // Redraw overlays when visitManager or settings change
         uiView.removeOverlays(uiView.overlays)
         loadGeoJSON(into: uiView)
     }
@@ -118,7 +124,7 @@ struct IndiaMapView: UIViewRepresentable {
                 
                 let stateName = statePolygon.stateName ?? ""
                 if parent.visitManager.isVisited(stateName) {
-                    renderer.fillColor = UIColor.systemGreen.withAlphaComponent(0.6)
+                    renderer.fillColor = UIColor(Color(hex: parent.visitedStateColor)).withAlphaComponent(0.6)
                 } else {
                     renderer.fillColor = UIColor.systemGray.withAlphaComponent(0.3)
                 }
