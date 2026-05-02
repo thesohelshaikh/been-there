@@ -1,41 +1,45 @@
 import Foundation
+import Combine
 
 class StateVisitManager: ObservableObject {
-    @Published var visitedStates: Set<String> = [] {
-        didSet {
-            save()
-        }
-    }
+    @Published var visitedStates: Set<String> = []
     
-    private let storageKey = "visited_states_key"
+    private let cityVisitManager: CityVisitManager
+    private var cancellables = Set<AnyCancellable>()
     
-    init() {
-        load()
+    init(cityVisitManager: CityVisitManager) {
+        self.cityVisitManager = cityVisitManager
+        
+        // Observe changes in cityVisitManager to update visitedStates
+        cityVisitManager.$visitedCities
+            .receive(on: RunLoop.main)
+            .sink { [weak self] _ in
+                self?.updateVisitedStates()
+            }
+            .store(in: &cancellables)
+            
+        updateVisitedStates()
     }
     
     func isVisited(_ stateName: String) -> Bool {
-        return visitedStates.contains(stateName)
+        visitedStates.contains(stateName)
     }
     
-    func toggleVisit(for stateName: String) {
-        if visitedStates.contains(stateName) {
-            visitedStates.remove(stateName)
-        } else {
-            visitedStates.insert(stateName)
+    private func updateVisitedStates() {
+        let capitals = CapitalManager.shared.allCapitals()
+        var newVisitedStates: Set<String> = []
+        
+        for (state, capital) in capitals {
+            if cityVisitManager.isVisited(cityName: capital, stateName: state) {
+                newVisitedStates.insert(state)
+            }
         }
-    }
-    
-    private func save() {
-        let array = Array(visitedStates)
-        UserDefaults.standard.set(array, forKey: storageKey)
-    }
-    
-    private func load() {
-        if let array = UserDefaults.standard.stringArray(forKey: storageKey) {
-            visitedStates = Set(array)
-        } else {
-            // Default states for first-time users
-            visitedStates = ["Maharashtra", "Karnataka", "Goa", "Rajasthan", "Delhi"]
+        
+        // Handle UTs or entities without explicit capitals if needed
+        // (currently following "Capital Only" rule as per user instruction)
+        
+        if self.visitedStates != newVisitedStates {
+            self.visitedStates = newVisitedStates
         }
     }
 }
