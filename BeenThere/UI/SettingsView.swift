@@ -33,6 +33,7 @@ struct SettingsView: View {
     
     @State private var showingExportSheet = false
     @State private var showingImportSheet = false
+    @State private var showingResetConfirmation = false
     @State private var exportDocument: TravelDataDocument?
     
     var body: some View {
@@ -72,7 +73,7 @@ struct SettingsView: View {
                 }
                 
                 Section {
-                    Button(role: .destructive, action: resetToDefaults) {
+                    Button(role: .destructive, action: { showingResetConfirmation = true }) {
                         HStack {
                             Spacer()
                             Text("Reset to Defaults")
@@ -112,6 +113,12 @@ struct SettingsView: View {
                 }
             }
             .navigationTitle("Settings")
+            .alert("Reset to Defaults", isPresented: $showingResetConfirmation) {
+                Button("Cancel", role: .cancel) { }
+                Button("Reset", role: .destructive, action: resetToDefaults)
+            } message: {
+                Text("Are you sure you want to reset all appearance settings to their default values? This cannot be undone.")
+            }
             .fileExporter(
                 isPresented: $showingExportSheet,
                 document: exportDocument,
