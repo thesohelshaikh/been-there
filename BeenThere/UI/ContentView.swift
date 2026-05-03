@@ -8,6 +8,7 @@ struct StateItem: Identifiable {
 struct ContentView: View {
     @StateObject var cityVisitManager = CityVisitManager()
     @StateObject var stateVisitManager: StateVisitManager
+    @StateObject var tripManager = TripManager()
 
     @AppStorage("visitedStateColor") private var visitedStateColor = "2D6A4F"
     @AppStorage("capitalMarkerColor") private var capitalMarkerColor = "FFD700"
@@ -35,6 +36,7 @@ struct ContentView: View {
             IndiaMapView(
                 stateVisitManager: stateVisitManager,
                 cityVisitManager: cityVisitManager,
+                tripManager: tripManager,
                 visitedStateColor: visitedStateColor,
                 capitalMarkerColor: capitalMarkerColor,
                 cityMarkerColor: cityMarkerColor
@@ -51,13 +53,13 @@ struct ContentView: View {
                 }
                 .tag(1)
             
-            Text("Coming Soon!")
+            TripsView(tripManager: tripManager)
                 .tabItem {
-                    Label("Places", systemImage: "mappin.and.ellipse")
+                    Label("Trips", systemImage: "road.lanes")
                 }
                 .tag(2)
             
-            SettingsView(visitManager: stateVisitManager)
+            SettingsView(visitManager: stateVisitManager, tripManager: tripManager)
                 .tabItem {
                     Label("Settings", systemImage: "gearshape")
                 }

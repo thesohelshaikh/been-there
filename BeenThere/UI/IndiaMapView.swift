@@ -5,14 +5,21 @@ class StatePolygon: MKPolygon {
     var stateName: String?
 }
 
+class TripPolyline: MKPolyline {
+    var transportMode: TransportMode?
+}
+
 struct IndiaMapView: UIViewRepresentable {
     @ObservedObject var stateVisitManager: StateVisitManager
     @ObservedObject var cityVisitManager: CityVisitManager
+    @ObservedObject var tripManager: TripManager
+    
     let visitedStateColor: String
     let capitalMarkerColor: String
     let cityMarkerColor: String
     
     @AppStorage("mapStyle") private var mapStyle = "standard"
+    @AppStorage("showTripsOnMap") private var showTripsOnMap = true
     
     func makeUIView(context: Context) -> MKMapView {
         let mapView = MKMapView()
@@ -28,8 +35,7 @@ struct IndiaMapView: UIViewRepresentable {
         let tapGesture = UITapGestureRecognizer(target: context.coordinator, action: #selector(Coordinator.handleTap(_:)))
         mapView.addGestureRecognizer(tapGesture)
         
-        loadGeoJSON(into: mapView)
-        updateAnnotations(on: mapView)
+        refreshMap(mapView)
         
         return mapView
     }
@@ -38,12 +44,19 @@ struct IndiaMapView: UIViewRepresentable {
         context.coordinator.parent = self
         uiView.mapType = mapStyle == "satellite" ? .satellite : .standard
         
+        refreshMap(uiView)
+    }
+    
+    private func refreshMap(_ mapView: MKMapView) {
         // Redraw overlays
-        uiView.removeOverlays(uiView.overlays)
-        loadGeoJSON(into: uiView)
+        mapView.removeOverlays(mapView.overlays)
+        loadGeoJSON(into: mapView)
+        if showTripsOnMap {
+            loadTrips(into: mapView)
+        }
         
         // Update annotations
-        updateAnnotations(on: uiView)
+        updateAnnotations(on: mapView)
     }
     
     func makeCoordinator() -> Coordinator {
@@ -93,6 +106,20 @@ struct IndiaMapView: UIViewRepresentable {
         } catch {
             print("Error decoding GeoJSON: \(error)")
         }
+    }
+    
+    private func loadTrips(into mapView: MKMapView) {
+        var tripOverlays: [MKOverlay] = []
+        for trip in tripManager.trips {
+            var coordinates = [trip.origin.coordinate]
+            coordinates.append(contentsOf: trip.stops.map { $0.coordinate })
+            coordinates.append(trip.destination.coordinate)
+            
+            let polyline = TripPolyline(coordinates: coordinates, count: coordinates.count)
+            polyline.transportMode = trip.transportMode
+            tripOverlays.append(polyline)
+        }
+        mapView.addOverlays(tripOverlays)
     }
     
     private func updateAnnotations(on mapView: MKMapView) {
@@ -163,6 +190,12 @@ struct IndiaMapView: UIViewRepresentable {
                 renderer.strokeColor = UIColor.white
                 renderer.lineWidth = 0.5
                 
+                return renderer
+            } else if let tripPolyline = overlay as? TripPolyline {
+                let renderer = MKPolylineRenderer(polyline: tripPolyline)
+                renderer.strokeColor = UIColor.systemBlue.withAlphaComponent(0.8)
+                renderer.lineWidth = 2.0
+                renderer.lineDashPattern = [4, 4]
                 return renderer
             }
             return MKOverlayRenderer(overlay: overlay)

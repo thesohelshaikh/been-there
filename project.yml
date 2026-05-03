@@ -29,3 +29,14 @@ targets:
     settings:
       base:
         GENERATE_INFOPLIST_FILE: YES
+
+schemes:
+  BeenThere:
+    build:
+      targets:
+        BeenThere: all
+    test:
+      targets:
+        - target: BeenThereTests
+    run:
+      executable: BeenThere

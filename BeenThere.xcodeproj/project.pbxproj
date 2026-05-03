@@ -8,13 +8,19 @@
 
 /* Begin PBXBuildFile section */
 		1B318848BA59461C0CB55D31 /* Color+Hex.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D7CC0C347711E8C3E823DC9 /* Color+Hex.swift */; };
+		26E2538496F34FEDB34D4076 /* CitySearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4663975F8B1EED1ED68FECB /* CitySearchView.swift */; };
 		296EA7FB158DC2593CDFD59C /* StateVisitManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C54D751EC55B8A7D260E38A /* StateVisitManager.swift */; };
 		2BC604C7BC556C3CC76B571A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 24567802EB06D9971337706F /* Assets.xcassets */; };
 		52F0E8FF66DA53F5279E984B /* StatsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E936BFA205F6FC6CCC79D18 /* StatsViewModel.swift */; };
+		5BED2C5711F306131C21D804 /* TripManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6246CDC285B454519E6A62CA /* TripManagerTests.swift */; };
+		608B5A22EC7FE5C2947E051F /* AddTripSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68020591CFE8AD39C8FFFAE1 /* AddTripSheet.swift */; };
+		666FF2F5E7643F0C709BA0E0 /* CitySearchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B8BDF73AC946249259BEFE2 /* CitySearchViewModel.swift */; };
 		964AE3FC642BE5432E2ADBD3 /* CityVisitManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE24B821C903539296F7E64 /* CityVisitManager.swift */; };
 		A3A795D50275AB936C914BFD /* StatsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 009CF4965EF414EE1B5C91FC /* StatsView.swift */; };
 		A5C5BC5F4E4B6BF21B286608 /* india_states.geojson in Resources */ = {isa = PBXBuildFile; fileRef = 8511B427ED541CF688BCBDC0 /* india_states.geojson */; };
+		AD2628D5E5BDBE5C32EABE6F /* TripsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F9E35059BDCDD663825E212 /* TripsView.swift */; };
 		B3D3E610C473D13BE0A7D92A /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68D9986380DA1BBC6AB293BB /* SettingsView.swift */; };
+		B4E9C297D9DEE967AF9156D6 /* TripManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 918497E0C66B9A507654C1E8 /* TripManager.swift */; };
 		BC7A226971632C47ACB05648 /* StatsViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36238EA7C346436057E2E796 /* StatsViewModelTests.swift */; };
 		C7B23E38AFC440F81B84FB61 /* IndiaMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF0E23BD024325DF5E41AEBF /* IndiaMapView.swift */; };
 		CAF230F973DC1BADB0D7518C /* BeenThereApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E0952C1722C8C4F95CB3D74 /* BeenThereApp.swift */; };
@@ -37,19 +43,25 @@
 		009CF4965EF414EE1B5C91FC /* StatsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatsView.swift; sourceTree = "<group>"; };
 		0D7CC0C347711E8C3E823DC9 /* Color+Hex.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+Hex.swift"; sourceTree = "<group>"; };
 		0DEC8D1592DBDE1B93B961AC /* BeenThereTests.xctest */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.cfbundle; path = BeenThereTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		0F9E35059BDCDD663825E212 /* TripsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TripsView.swift; sourceTree = "<group>"; };
 		22C711256AA97E458E8FB5DC /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		24567802EB06D9971337706F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		36238EA7C346436057E2E796 /* StatsViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatsViewModelTests.swift; sourceTree = "<group>"; };
 		5C54D751EC55B8A7D260E38A /* StateVisitManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StateVisitManager.swift; sourceTree = "<group>"; };
+		6246CDC285B454519E6A62CA /* TripManagerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TripManagerTests.swift; sourceTree = "<group>"; };
+		68020591CFE8AD39C8FFFAE1 /* AddTripSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTripSheet.swift; sourceTree = "<group>"; };
 		68D9986380DA1BBC6AB293BB /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
+		6B8BDF73AC946249259BEFE2 /* CitySearchViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CitySearchViewModel.swift; sourceTree = "<group>"; };
 		6E0952C1722C8C4F95CB3D74 /* BeenThereApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BeenThereApp.swift; sourceTree = "<group>"; };
 		8511B427ED541CF688BCBDC0 /* india_states.geojson */ = {isa = PBXFileReference; lastKnownFileType = text; path = india_states.geojson; sourceTree = "<group>"; };
+		918497E0C66B9A507654C1E8 /* TripManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TripManager.swift; sourceTree = "<group>"; };
 		927FDF49CA9D254ED3961125 /* BeenThere.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BeenThere.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9DBF00A6AE3EC97BFA805238 /* india_states.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = india_states.json; sourceTree = "<group>"; };
 		9E936BFA205F6FC6CCC79D18 /* StatsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatsViewModel.swift; sourceTree = "<group>"; };
 		CEE24B821C903539296F7E64 /* CityVisitManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CityVisitManager.swift; sourceTree = "<group>"; };
 		D6417C7805FA208BB5D87ED8 /* CitySelectionSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CitySelectionSheet.swift; sourceTree = "<group>"; };
 		DF0E23BD024325DF5E41AEBF /* IndiaMapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IndiaMapView.swift; sourceTree = "<group>"; };
+		F4663975F8B1EED1ED68FECB /* CitySearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CitySearchView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXGroup section */
@@ -83,6 +95,9 @@
 		58DFC25648B42D7B67D0DCC1 /* UI */ = {
 			isa = PBXGroup;
 			children = (
+				68020591CFE8AD39C8FFFAE1 /* AddTripSheet.swift */,
+				F4663975F8B1EED1ED68FECB /* CitySearchView.swift */,
+				6B8BDF73AC946249259BEFE2 /* CitySearchViewModel.swift */,
 				D6417C7805FA208BB5D87ED8 /* CitySelectionSheet.swift */,
 				CEE24B821C903539296F7E64 /* CityVisitManager.swift */,
 				0D7CC0C347711E8C3E823DC9 /* Color+Hex.swift */,
@@ -92,6 +107,8 @@
 				5C54D751EC55B8A7D260E38A /* StateVisitManager.swift */,
 				009CF4965EF414EE1B5C91FC /* StatsView.swift */,
 				9E936BFA205F6FC6CCC79D18 /* StatsViewModel.swift */,
+				918497E0C66B9A507654C1E8 /* TripManager.swift */,
+				0F9E35059BDCDD663825E212 /* TripsView.swift */,
 			);
 			path = UI;
 			sourceTree = "<group>";
@@ -119,6 +136,7 @@
 			isa = PBXGroup;
 			children = (
 				36238EA7C346436057E2E796 /* StatsViewModelTests.swift */,
+				6246CDC285B454519E6A62CA /* TripManagerTests.swift */,
 			);
 			path = BeenThereTests;
 			sourceTree = "<group>";
@@ -209,7 +227,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				608B5A22EC7FE5C2947E051F /* AddTripSheet.swift in Sources */,
 				CAF230F973DC1BADB0D7518C /* BeenThereApp.swift in Sources */,
+				26E2538496F34FEDB34D4076 /* CitySearchView.swift in Sources */,
+				666FF2F5E7643F0C709BA0E0 /* CitySearchViewModel.swift in Sources */,
 				D66EF0E291CAEEC21AD2B89D /* CitySelectionSheet.swift in Sources */,
 				964AE3FC642BE5432E2ADBD3 /* CityVisitManager.swift in Sources */,
 				1B318848BA59461C0CB55D31 /* Color+Hex.swift in Sources */,
@@ -219,6 +240,8 @@
 				296EA7FB158DC2593CDFD59C /* StateVisitManager.swift in Sources */,
 				A3A795D50275AB936C914BFD /* StatsView.swift in Sources */,
 				52F0E8FF66DA53F5279E984B /* StatsViewModel.swift in Sources */,
+				B4E9C297D9DEE967AF9156D6 /* TripManager.swift in Sources */,
+				AD2628D5E5BDBE5C32EABE6F /* TripsView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -227,6 +250,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				BC7A226971632C47ACB05648 /* StatsViewModelTests.swift in Sources */,
+				5BED2C5711F306131C21D804 /* TripManagerTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

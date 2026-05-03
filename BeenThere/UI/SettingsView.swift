@@ -24,16 +24,19 @@ struct TravelDataDocument: FileDocument {
 
 struct SettingsView: View {
     @ObservedObject var visitManager: StateVisitManager
+    @ObservedObject var tripManager: TripManager
     
     @AppStorage("isDarkMode") private var isDarkMode = false
     @AppStorage("visitedStateColor") private var visitedStateColor = "2D6A4F"
     @AppStorage("capitalMarkerColor") private var capitalMarkerColor = "FFD700"
     @AppStorage("cityMarkerColor") private var cityMarkerColor = "34C759"
     @AppStorage("mapStyle") private var mapStyle = "standard"
+    @AppStorage("showTripsOnMap") private var showTripsOnMap = true
     
     @State private var showingExportSheet = false
     @State private var showingImportSheet = false
     @State private var showingResetConfirmation = false
+    @State private var showingClearTripsConfirmation = false
     @State private var exportDocument: TravelDataDocument?
     
     var body: some View {
@@ -65,21 +68,13 @@ struct SettingsView: View {
                 }
                 
                 Section(header: Text("Map Settings")) {
+                    Toggle("Show Trips on Map", isOn: $showTripsOnMap)
+                    
                     Picker("Map Style", selection: $mapStyle) {
                         Text("Standard").tag("standard")
                         Text("Satellite").tag("satellite")
                     }
                     .pickerStyle(SegmentedPickerStyle())
-                }
-                
-                Section {
-                    Button(role: .destructive, action: { showingResetConfirmation = true }) {
-                        HStack {
-                            Spacer()
-                            Text("Reset to Defaults")
-                            Spacer()
-                        }
-                    }
                 }
                 
                 Section(header: Text("Data Management")) {
@@ -97,6 +92,14 @@ struct SettingsView: View {
                     }) {
                         Label("Import Visited Data", systemImage: "square.and.arrow.down")
                     }
+                    
+                    Button(role: .destructive, action: { showingClearTripsConfirmation = true }) {
+                        Label("Clear All Trips", systemImage: "trash")
+                    }
+                    
+                    Button(role: .destructive, action: { showingResetConfirmation = true }) {
+                        Label("Reset App Settings", systemImage: "arrow.counterclockwise")
+                    }
                 }
                 
                 Section(header: Text("About")) {
@@ -113,11 +116,19 @@ struct SettingsView: View {
                 }
             }
             .navigationTitle("Settings")
-            .alert("Reset to Defaults", isPresented: $showingResetConfirmation) {
+            .alert("Reset Settings", isPresented: $showingResetConfirmation) {
                 Button("Cancel", role: .cancel) { }
                 Button("Reset", role: .destructive, action: resetToDefaults)
             } message: {
-                Text("Are you sure you want to reset all appearance settings to their default values? This cannot be undone.")
+                Text("Are you sure you want to reset all appearance settings to their default values? Your visited data and trips will not be affected.")
+            }
+            .alert("Clear All Trips", isPresented: $showingClearTripsConfirmation) {
+                Button("Cancel", role: .cancel) { }
+                Button("Clear", role: .destructive) {
+                    tripManager.clearAllTrips()
+                }
+            } message: {
+                Text("Are you sure you want to delete all recorded trips? This action cannot be undone.")
             }
             .fileExporter(
                 isPresented: $showingExportSheet,
@@ -169,5 +180,5 @@ struct SettingsView: View {
 }
 
 #Preview {
-    SettingsView(visitManager: StateVisitManager(cityVisitManager: CityVisitManager()))
+    SettingsView(visitManager: StateVisitManager(cityVisitManager: CityVisitManager()), tripManager: TripManager())
 }
