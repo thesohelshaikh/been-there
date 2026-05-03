@@ -6,11 +6,9 @@ BeenThere is a native iOS application designed to help you track your travels ac
 
 ## Screenshots
 
-| Map View | Stats View |
-|:---:|:---:|
-| <img src="screenshots/map.png" width="250" alt="Map View" /> | <img src="screenshots/stats.png" width="250" alt="Stats View" /> |
-| **Trips View** | **Settings View** |
-| <img src="screenshots/trips.png" width="250" alt="Trips View" /> | <img src="screenshots/settings.png" width="250" alt="Settings View" /> |
+| Map View | Stats View | Trips View | Settings View |
+|:---:|:---:|:---:|:---:|
+| <img src="screenshots/map.png" width="200" alt="Map View" /> | <img src="screenshots/stats.png" width="200" alt="Stats View" /> | <img src="screenshots/trips.png" width="200" alt="Trips View" /> | <img src="screenshots/settings.png" width="200" alt="Settings View" /> |
 
 ## Features
 
