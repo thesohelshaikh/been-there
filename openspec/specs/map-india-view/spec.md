@@ -31,3 +31,14 @@ The system SHALL display markers for all state capitals and all cities marked as
 #### Scenario: Differentiate Capitals
 - **WHEN** a capital city is rendered on the map
 - **THEN** the system SHALL use the "Capital Marker Color" to distinguish it from regular cities which use the "City Marker Color"
+
+### Requirement: Trip Visualization
+The map SHALL visualize recorded trips as continuous polylines connecting the origin, all intermediate stops, and the destination in sequence.
+
+#### Scenario: View Multi-stop Trip on Map
+- **WHEN** a trip exists and trip visibility is enabled
+- **THEN** the system SHALL draw a continuous `MKPolyline` connecting all coordinates in the trip's sequence (Origin -> Stops -> Destination)
+
+#### Scenario: Toggle Trip Visibility
+- **WHEN** the user changes the "Show Trips on Map" setting
+- **THEN** the system SHALL add or remove the trip overlays from the map accordingly

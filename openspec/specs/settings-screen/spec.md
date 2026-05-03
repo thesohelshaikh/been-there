@@ -60,3 +60,10 @@ The system SHALL provide a button in the Settings screen to reset all appearance
 - **WHEN** the user taps the "Reset to Defaults" button
 - **THEN** the system SHALL restore "Visited State Color", "Capital Marker Color", "City Marker Color", and "Map Style" to their factory default values
 - **THEN** the Map View SHALL update its appearance immediately to reflect these defaults
+
+### Requirement: Clear Trip Data
+The system SHALL allow users to reset trip data from the settings screen.
+
+#### Scenario: Clear All Trips
+- **WHEN** the user selects the "Clear All Trips" action and confirms
+- **THEN** the system SHALL remove all stored trips and update the UI immediately
