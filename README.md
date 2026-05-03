@@ -7,15 +7,19 @@ BeenThere is a native iOS application designed to help you track your travels ac
 ## Screenshots
 
 <p align="center">
-  <img src="screenshots/map.png" width="30%" alt="Map View" />
-  <img src="screenshots/stats.png" width="30%" alt="Stats View" />
-  <img src="screenshots/settings.png" width="30%" alt="Settings View" />
+  <img src="screenshots/map.png" width="24%" alt="Map View" />
+  <img src="screenshots/stats.png" width="24%" alt="Stats View" />
+  <img src="screenshots/trips.png" width="24%" alt="Trips View" />
+  <img src="screenshots/settings.png" width="24%" alt="Settings View" />
 </p>
 
 ## Features
 
 - **Interactive India Map:** Tap on states and union territories to explore and mark cities as visited.
 - **City-Level Tracking:** Track individual cities within each state. Distinguish between capital cities and regular visited cities.
+- **Road Trip Tracking:** Record detailed trips between cities with support for multiple intermediate stops and various transport modes (Plane, Train, Car, Bike).
+- **Travel Dashboard:** A dedicated Trips tab with a visual summary card showing total states, cities, distance, and trip statistics.
+- **Detailed Analytics:** Drill down into your travel summary to see exactly which states and cities you've visited through your trips.
 - **Customizable Appearance:** Personalize your map with custom colors for visited states, capital markers, and regular city markers. Supports both Standard and Satellite map styles.
 - **Dark Mode Support:** A fully adaptive UI that looks great in both light and dark appearances.
 - **Dynamic Stats:** Track your progress with percentage-based coverage for different regions of India, with specific breakdowns for States and Union Territories.

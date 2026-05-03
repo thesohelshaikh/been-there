@@ -13,6 +13,7 @@ This is a native iOS application built with SwiftUI, focusing on tracking travel
     *   **Build System:** XcodeGen (managed by `project.yml`).
 *   **Architecture:** MVVM (Model-View-ViewModel).
     *   `StateVisitManager`: Central source of truth for visited states.
+    *   `TripManager`: Manages the lifecycle and persistence of recorded trips.
     *   `StatsViewModel`: Computes statistics and regional coverage.
     *   `IndiaMapView`: SwiftUI wrapper (`UIViewRepresentable`) for `MKMapView`.
 
@@ -51,6 +52,9 @@ This is a native iOS application built with SwiftUI, focusing on tracking travel
 *   `project.yml`: XcodeGen configuration.
 *   `BeenThere/App/BeenThereApp.swift`: App entry point.
 *   `BeenThere/UI/StateVisitManager.swift`: Persistence logic for visited states.
+*   `BeenThere/UI/TripManager.swift`: Management of road trips and intermediate stops.
+*   `BeenThere/UI/TripsView.swift`: The main view for managing journeys.
+*   `BeenThere/UI/TripsSummaryView.swift`: A card-based dashboard for travel statistics.
 *   `BeenThere/UI/IndiaMapView.swift`: Map implementation using MapKit.
 *   `BeenThere/Resources/india_states.geojson`: Geographic data for the map.
 *   `openspec/`: Development specifications and task tracking.
