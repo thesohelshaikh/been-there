@@ -1,5 +1,7 @@
 # BeenThere
 
+*Vibe coded with Gemini*
+
 BeenThere is a native iOS application designed to help you track your travels across India. It provides an interactive map where you can mark visited states and union territories, and view detailed statistics about your regional coverage.
 
 ## Screenshots
@@ -93,6 +95,3 @@ The map boundaries are provided by `india_states.geojson` located in the `Resour
 ## License
 
 This project is licensed under the MIT License.
-
----
-*Vibe coded with Gemini*
