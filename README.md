@@ -93,3 +93,6 @@ The map boundaries are provided by `india_states.geojson` located in the `Resour
 ## License
 
 This project is licensed under the MIT License.
+
+---
+*Vibe coded with Gemini*
