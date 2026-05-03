@@ -21,6 +21,20 @@
                ReferencedContainer = "container:BeenThere.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "NO"
+            buildForProfiling = "NO"
+            buildForArchiving = "NO"
+            buildForAnalyzing = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "4AEA738B15502ECA3EF81AE9"
+               BuildableName = "BeenThereTests.xctest"
+               BlueprintName = "BeenThereTests"
+               ReferencedContainer = "container:BeenThere.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
       </BuildActionEntries>
    </BuildAction>
    <TestAction
@@ -39,7 +53,20 @@
          </BuildableReference>
       </MacroExpansion>
       <Testables>
+         <TestableReference
+            skipped = "NO"
+            parallelizable = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "4AEA738B15502ECA3EF81AE9"
+               BuildableName = "BeenThereTests.xctest"
+               BlueprintName = "BeenThereTests"
+               ReferencedContainer = "container:BeenThere.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
       </Testables>
+      <CommandLineArguments>
+      </CommandLineArguments>
    </TestAction>
    <LaunchAction
       buildConfiguration = "Debug"

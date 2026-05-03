@@ -2,35 +2,59 @@ import SwiftUI
 
 struct TripsView: View {
     @ObservedObject var tripManager: TripManager
+    @ObservedObject var cityVisitManager: CityVisitManager
+    @ObservedObject var stateVisitManager: StateVisitManager
+
+    @StateObject private var summaryViewModel: TripsSummaryViewModel
+
     @State private var showingAddTrip = false
     @State private var tripToEdit: Trip?
     @State private var tripToDelete: Trip?
     @State private var showingDeleteAlert = false
-    
+
+    init(tripManager: TripManager, cityVisitManager: CityVisitManager, stateVisitManager: StateVisitManager) {
+        self.tripManager = tripManager
+        self.cityVisitManager = cityVisitManager
+        self.stateVisitManager = stateVisitManager
+        _summaryViewModel = StateObject(wrappedValue: TripsSummaryViewModel(
+            tripManager: tripManager,
+            cityVisitManager: cityVisitManager,
+            stateVisitManager: stateVisitManager
+        ))
+    }
+
     var body: some View {
         NavigationView {
             List {
-                ForEach(tripManager.trips) { trip in
-                    TripRow(trip: trip)
-                        .swipeActions(edge: .leading) {
-                            Button {
-                                tripToEdit = trip
-                            } label: {
-                                Label("Edit", systemImage: "pencil")
+                Section {
+                    TripsSummaryView(viewModel: summaryViewModel)
+                        .listRowInsets(EdgeInsets(top: 16, leading: 0, bottom: 8, trailing: 0))
+                        .listRowBackground(Color.clear)
+                }
+
+                Section {
+                    ForEach(tripManager.trips) { trip in
+                        TripRow(trip: trip)
+                            .swipeActions(edge: .leading) {
+                                Button {
+                                    tripToEdit = trip
+                                } label: {
+                                    Label("Edit", systemImage: "pencil")
+                                }
+                                .tint(.orange)
                             }
-                            .tint(.orange)
-                        }
-                        .swipeActions(edge: .trailing) {
-                            Button(role: .destructive) {
-                                tripToDelete = trip
-                                showingDeleteAlert = true
-                            } label: {
-                                Label("Delete", systemImage: "trash")
+                            .swipeActions(edge: .trailing) {
+                                Button(role: .destructive) {
+                                    tripToDelete = trip
+                                    showingDeleteAlert = true
+                                } label: {
+                                    Label("Delete", systemImage: "trash")
+                                }
                             }
-                        }
+                    }
                 }
             }
-            .navigationTitle("Road Trips")
+            .navigationTitle("Trips")
             .toolbar {
                 ToolbarItem(placement: .navigationBarTrailing) {
                     Button(action: { 

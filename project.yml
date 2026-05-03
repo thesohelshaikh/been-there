@@ -31,12 +31,13 @@ targets:
         GENERATE_INFOPLIST_FILE: YES
 
 schemes:
-  BeenThere:
+  BeenThereApp:
     build:
       targets:
         BeenThere: all
+        BeenThereTests: [test]
     test:
       targets:
-        - target: BeenThereTests
+        - BeenThereTests
     run:
       executable: BeenThere

@@ -53,7 +53,11 @@ struct ContentView: View {
                 }
                 .tag(1)
             
-            TripsView(tripManager: tripManager)
+            TripsView(
+                tripManager: tripManager,
+                cityVisitManager: cityVisitManager,
+                stateVisitManager: stateVisitManager
+            )
                 .tabItem {
                     Label("Trips", systemImage: "road.lanes")
                 }
